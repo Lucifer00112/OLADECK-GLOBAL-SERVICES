@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 3%;
+  --foreground: 220 18% 96%;
+  --card: 0 0% 7%;
+  --card-foreground: 220 18% 96%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 220 18% 96%;
+  --primary: 45 67% 47%;
+  --primary-foreground: 0 0% 5%;
+  --secondary: 45 67% 47%;
+  --secondary-foreground: 0 0% 5%;
+  --muted: 0 0% 11%;
+  --muted-foreground: 220 14% 72%;
+  --accent: 45 67% 47%;
+  --accent-foreground: 0 0% 5%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 45 67% 47%;
+  --radius: 0.75rem;
+}
+
+.dark {
+  --background: 0 0% 3%;
+  --foreground: 220 18% 96%;
+  --card: 0 0% 7%;
+  --card-foreground: 220 18% 96%;
+  --popover: 0 0% 7%;
+  --popover-foreground: 220 18% 96%;
+  --primary: 45 67% 47%;
+  --primary-foreground: 0 0% 5%;
+  --secondary: 0 0% 12%;
+  --secondary-foreground: 220 18% 96%;
+  --muted: 0 0% 11%;
+  --muted-foreground: 220 14% 72%;
+  --accent: 45 67% 47%;
+  --accent-foreground: 0 0% 5%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --ring: 45 67% 47%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: rgba(201, 162, 39, 0.35);
+}
+
+.glass {
+  background: rgba(5, 5, 5, 0.72);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.dark .glass {
+  background: rgba(5, 5, 5, 0.72);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.focus-ring {
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
+
+.container-pad {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.video-panel {
+  transform: translateZ(0);
+  background: #050505;
+}
+
+.kenburns {
+  animation: kenburns 18s ease-in-out infinite alternate;
+}
+
+.pan-left {
+  animation: pan-left 12s ease-in-out infinite alternate;
+}
+
+.pan-right {
+  animation: pan-right 14s ease-in-out infinite alternate;
+}
+
+.scanline {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(255, 255, 255, 0.12),
+    transparent
+  );
+  animation: scanline 4.5s ease-in-out infinite;
+}
+
+.showcase-marquee {
+  animation: showcase-marquee 42s linear infinite;
+}
+
+.showcase-marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes kenburns {
+  from {
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-2%, -2%, 0);
+  }
+}
+
+@keyframes pan-left {
+  from {
+    transform: scale(1.08) translateX(0);
+  }
+  to {
+    transform: scale(1.16) translateX(-6%);
+  }
+}
+
+@keyframes pan-right {
+  from {
+    transform: scale(1.08) translateX(-5%);
+  }
+  to {
+    transform: scale(1.16) translateX(2%);
+  }
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  50%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes showcase-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kenburns,
+  .pan-left,
+  .pan-right,
+  .scanline,
+  .showcase-marquee {
+    animation: none;
+  }
+}
