@@ -14,7 +14,7 @@ const answers = [
   },
   {
     keyword: "duty",
-    answer: "Duty depends on vehicle type, age, engine size, value, and current customs assessment rules. Use the estimator for a planning range."
+    answer: "Duty depends on vehicle type, age, engine size, value, and current customs assessment rules. Use the duty estimator for a planning range."
   },
   {
     keyword: "track",
@@ -45,57 +45,75 @@ export function AiAssistant() {
   }
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 flex flex-col items-end gap-3">
+    <div className="fixed bottom-4 right-4 z-50 flex flex-col items-end gap-3 sm:bottom-6 sm:right-6">
       {open ? (
-        <section className="w-[min(92vw,360px)] overflow-hidden rounded-lg border bg-card shadow-glow">
-          <div className="flex items-center justify-between bg-navy px-4 py-3 text-white">
-            <div className="flex items-center gap-2 text-sm font-semibold">
-              <Bot className="h-4 w-4 text-gold" /> Clearing Assistant
-            </div>
-            <Button variant="ghost" size="icon" onClick={() => setOpen(false)} aria-label="Close assistant">
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-          <div className="max-h-72 space-y-3 overflow-y-auto p-4">
-            {messages.map((message, index) => (
-              <p
-                key={`${message}-${index}`}
-                className={`rounded-lg px-3 py-2 text-sm ${
-                  index % 2 ? "ml-8 bg-muted" : "mr-8 bg-gold/15 text-foreground"
-                }`}
+        <>
+          {/* Mobile backdrop */}
+          <div
+            className="fixed inset-0 bg-black/40 backdrop-blur-xs sm:hidden"
+            onClick={() => setOpen(false)}
+          />
+
+          <section className="relative w-[calc(100vw-2rem)] max-w-sm overflow-hidden rounded-xl border bg-card shadow-glow sm:w-[360px]">
+            <div className="flex items-center justify-between bg-navy px-4 py-3 text-white">
+              <div className="flex items-center gap-2 text-sm font-semibold">
+                <Bot className="h-4 w-4 text-gold" /> Clearing Assistant
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setOpen(false)}
+                aria-label="Close assistant"
+                className="text-white/80 hover:bg-white/10 hover:text-white"
               >
-                {message}
-              </p>
-            ))}
-          </div>
-          <div className="grid gap-2 border-t p-3">
-            <div className="flex gap-2">
-              <Input
-                value={value}
-                onChange={(event) => setValue(event.target.value)}
-                onKeyDown={(event) => event.key === "Enter" && ask()}
-                placeholder="Ask about duty, documents, timing..."
-                aria-label="Ask the assistant"
-              />
-              <Button size="icon" onClick={ask} aria-label="Send question">
-                <Send className="h-4 w-4" />
+                <X className="h-4 w-4" />
               </Button>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <Button asChild variant="outline" size="sm">
-                <Link href="/quote">Request Quote</Link>
-              </Button>
-              <Button asChild variant="secondary" size="sm">
-                <a href={whatsappUrl("Hello MG Enterprises, I need assistance with vehicle clearing.")}>
-                  WhatsApp
-                </a>
-              </Button>
+
+            <div className="max-h-64 sm:max-h-72 space-y-3 overflow-y-auto p-4">
+              {messages.map((message, index) => (
+                <p
+                  key={`${message}-${index}`}
+                  className={`rounded-lg px-3 py-2 text-sm leading-snug ${
+                    index % 2 ? "ml-6 bg-muted" : "mr-6 bg-gold/15 text-foreground font-medium"
+                  }`}
+                >
+                  {message}
+                </p>
+              ))}
             </div>
-          </div>
-        </section>
+
+            <div className="grid gap-2 border-t p-3 bg-card">
+              <div className="flex gap-2">
+                <Input
+                  value={value}
+                  onChange={(event) => setValue(event.target.value)}
+                  onKeyDown={(event) => event.key === "Enter" && ask()}
+                  placeholder="Ask about duty, documents..."
+                  aria-label="Ask the assistant"
+                  className="text-sm"
+                />
+                <Button size="icon" onClick={ask} aria-label="Send question">
+                  <Send className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-1">
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/quote">Request Quote</Link>
+                </Button>
+                <Button asChild variant="secondary" size="sm">
+                  <a href={whatsappUrl("Hello MG Enterprises, I need assistance with vehicle clearing.")}>
+                    WhatsApp
+                  </a>
+                </Button>
+              </div>
+            </div>
+          </section>
+        </>
       ) : null}
+
       <Button
-        className="h-12 w-12 rounded-full"
+        className="h-12 w-12 rounded-full shadow-lg transition hover:scale-105"
         onClick={() => setOpen((current) => !current)}
         aria-label="Open clearing assistant"
       >
