@@ -144,7 +144,7 @@ export default function HomePage() {
       </section>
 
       {/* 3. CORE SERVICES GRID */}
-      <section id="services" className="py-16 md:py-24">
+      <section id="services" className="section-tint-subtle py-14 md:py-20">
         <div className="container-pad">
           <div className="max-w-2xl">
             <Badge className="border-gold/40 bg-gold/10 text-gold">Services</Badge>
@@ -197,7 +197,7 @@ export default function HomePage() {
       </section>
 
       {/* 5. QUOTE PLANNING & TOOLS (Estimator & Checklist) */}
-      <section className="py-16 md:py-24 bg-muted/30">
+      <section className="py-14 md:py-20 section-tint-blue border-y border-border/30">
         <div className="container-pad grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
           <div>
             <Badge className="border-gold/40 bg-gold/10 text-gold">Why Choose Us</Badge>
@@ -227,7 +227,7 @@ export default function HomePage() {
       {/* 7. REAL-TIME WORKFLOW & GALLERY */}
       <Gallery items={galleryItems} />
 
-      <section className="py-16 md:py-24 border-t">
+      <section className="section-tint-subtle border-t border-border/30 py-14 md:py-20">
         <div className="container-pad grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Live Tracking</p>

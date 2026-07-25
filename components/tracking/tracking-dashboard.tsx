@@ -80,7 +80,17 @@ export function TrackingDashboard({ initialTracking }: { initialTracking?: strin
                     {record.customer} - {record.trackingNumber}
                   </p>
                 </div>
-                <Badge className="border-gold/40 bg-gold/10">{visibleStatus}</Badge>
+                <Badge
+                  className={`text-xs font-semibold border ${
+                    record.status === "Received by Customer"
+                      ? "status-completed"
+                      : record.status === "Pending"
+                      ? "status-pending"
+                      : "status-received"
+                  }`}
+                >
+                  {visibleStatus}
+                </Badge>
               </div>
             </CardHeader>
             <CardContent>

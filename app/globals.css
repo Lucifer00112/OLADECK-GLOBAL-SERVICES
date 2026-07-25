@@ -2,47 +2,62 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────
+   Design tokens
+   ───────────────────────────────────────────────────────────────── */
 :root {
-  --background: 0 0% 3%;
+  /* Core surface */
+  --background: 224 14% 6%;
   --foreground: 220 18% 96%;
-  --card: 0 0% 7%;
+  --card: 224 14% 9%;
   --card-foreground: 220 18% 96%;
-  --popover: 0 0% 7%;
+  --popover: 224 14% 9%;
   --popover-foreground: 220 18% 96%;
-  --primary: 45 67% 47%;
-  --primary-foreground: 0 0% 5%;
-  --secondary: 45 67% 47%;
-  --secondary-foreground: 0 0% 5%;
-  --muted: 0 0% 11%;
-  --muted-foreground: 220 14% 72%;
-  --accent: 45 67% 47%;
-  --accent-foreground: 0 0% 5%;
+
+  /* Brand accent — gold */
+  --primary: 43 68% 48%;
+  --primary-foreground: 224 14% 6%;
+  --secondary: 224 14% 13%;
+  --secondary-foreground: 220 18% 96%;
+  --muted: 224 12% 12%;
+  --muted-foreground: 220 12% 60%;
+  --accent: 43 68% 48%;
+  --accent-foreground: 224 14% 6%;
+
+  /* Status */
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --border: 0 0% 18%;
-  --input: 0 0% 18%;
-  --ring: 45 67% 47%;
+
+  /* Structure */
+  --border: 224 12% 16%;
+  --input: 224 12% 16%;
+  --ring: 43 68% 48%;
   --radius: 0.75rem;
+
+  /* Semantic status colors (used in badge & dashboard) */
+  --status-received: 199 80% 50%;       /* sky blue  */
+  --status-pending: 37 90% 50%;         /* amber     */
+  --status-completed: 145 63% 42%;      /* emerald   */
 }
 
 .dark {
-  --background: 0 0% 3%;
+  --background: 224 14% 6%;
   --foreground: 220 18% 96%;
-  --card: 0 0% 7%;
+  --card: 224 14% 9%;
   --card-foreground: 220 18% 96%;
-  --popover: 0 0% 7%;
+  --popover: 224 14% 9%;
   --popover-foreground: 220 18% 96%;
-  --primary: 45 67% 47%;
-  --primary-foreground: 0 0% 5%;
-  --secondary: 0 0% 12%;
+  --primary: 43 68% 48%;
+  --primary-foreground: 224 14% 6%;
+  --secondary: 224 14% 13%;
   --secondary-foreground: 220 18% 96%;
-  --muted: 0 0% 11%;
-  --muted-foreground: 220 14% 72%;
-  --accent: 45 67% 47%;
-  --accent-foreground: 0 0% 5%;
-  --border: 0 0% 18%;
-  --input: 0 0% 18%;
-  --ring: 45 67% 47%;
+  --muted: 224 12% 12%;
+  --muted-foreground: 220 12% 60%;
+  --accent: 43 68% 48%;
+  --accent-foreground: 224 14% 6%;
+  --border: 224 12% 16%;
+  --input: 224 12% 16%;
+  --ring: 43 68% 48%;
 }
 
 * {
@@ -56,11 +71,71 @@ html {
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Inter", "Outfit", system-ui, -apple-system, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(201, 162, 39, 0.35);
+  background: rgba(212, 175, 55, 0.32);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Section tinting utilities
+   ───────────────────────────────────────────────────────────────── */
+.section-tint-navy {
+  background: linear-gradient(135deg, #0B1F3A 0%, #09192e 100%);
+}
+
+.section-tint-blue {
+  background: linear-gradient(135deg, hsl(224 18% 8%) 0%, hsl(224 14% 6%) 100%);
+}
+
+.section-tint-subtle {
+  background: linear-gradient(180deg, hsl(224 14% 7%) 0%, hsl(224 14% 6%) 100%);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Semantic status badge helpers
+   ───────────────────────────────────────────────────────────────── */
+.status-received {
+  background: rgba(14, 165, 233, 0.12);
+  color: #38bdf8;
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+.status-pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.status-completed {
+  background: rgba(34, 197, 94, 0.12);
+  color: #4ade80;
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Card depth utilities
+   ───────────────────────────────────────────────────────────────── */
+.card-depth-1 {
+  background: hsl(var(--card));
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 1px 3px rgba(0,0,0,.25), 0 1px 2px rgba(0,0,0,.18);
+}
+
+.card-depth-2 {
+  background: hsl(224 14% 11%);
+  border: 1px solid hsl(224 12% 20%);
+  box-shadow: 0 4px 24px rgba(0,0,0,.3), 0 1px 3px rgba(0,0,0,.2);
+}
+
+.card-highlight {
+  background: linear-gradient(145deg, hsl(224 14% 11%), hsl(224 14% 9%));
+  border: 1px solid hsl(var(--border));
+  box-shadow: 0 0 0 1px rgba(212,175,55,.06), 0 4px 24px rgba(0,0,0,.3);
 }
 
 .glass {
