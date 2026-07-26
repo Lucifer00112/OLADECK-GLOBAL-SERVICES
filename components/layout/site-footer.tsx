@@ -69,7 +69,7 @@ export function SiteFooter() {
             <p className="mb-3 text-sm font-semibold text-gold">{group}</p>
             <div className="grid gap-2">
               {links.map(([label, href]) => (
-                <Link key={href} href={href} className="text-sm text-white/65 transition hover:text-white">
+                <Link key={`${label}-${href}`} href={href} className="text-sm text-white/65 transition hover:text-white">
                   {label}
                 </Link>
               ))}
