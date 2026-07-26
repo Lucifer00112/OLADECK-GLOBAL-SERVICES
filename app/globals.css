@@ -3,61 +3,66 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────────────────────────
-   Design tokens
+   Design tokens — Light Professional Theme
    ───────────────────────────────────────────────────────────────── */
 :root {
-  /* Core surface */
-  --background: 224 14% 6%;
-  --foreground: 220 18% 96%;
-  --card: 224 14% 9%;
-  --card-foreground: 220 18% 96%;
-  --popover: 224 14% 9%;
-  --popover-foreground: 220 18% 96%;
+  --background: 0 0% 100%;
+  --foreground: 220 35% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 35% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 220 35% 12%;
 
-  /* Brand accent — gold */
-  --primary: 43 68% 48%;
-  --primary-foreground: 224 14% 6%;
-  --secondary: 224 14% 13%;
-  --secondary-foreground: 220 18% 96%;
-  --muted: 224 12% 12%;
-  --muted-foreground: 220 12% 60%;
-  --accent: 43 68% 48%;
-  --accent-foreground: 224 14% 6%;
+  /* Navy primary */
+  --primary: 215 60% 18%;
+  --primary-foreground: 0 0% 100%;
 
-  /* Status */
+  /* Gold accent */
+  --secondary: 43 85% 45%;
+  --secondary-foreground: 0 0% 100%;
+
+  --muted: 220 14% 96%;
+  --muted-foreground: 220 14% 46%;
+  --accent: 215 60% 18%;
+  --accent-foreground: 0 0% 100%;
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
 
-  /* Structure */
-  --border: 224 12% 16%;
-  --input: 224 12% 16%;
-  --ring: 43 68% 48%;
-  --radius: 0.75rem;
+  --border: 220 13% 91%;
+  --input: 220 13% 91%;
+  --ring: 215 60% 18%;
+  --radius: 0.5rem;
 
-  /* Semantic status colors (used in badge & dashboard) */
-  --status-received: 199 80% 50%;       /* sky blue  */
-  --status-pending: 37 90% 50%;         /* amber     */
-  --status-completed: 145 63% 42%;      /* emerald   */
+  /* Brand colors */
+  --navy: 215 60% 18%;
+  --gold: 43 85% 45%;
+  --light-blue: 204 80% 95%;
+
+  /* Status */
+  --status-received: 199 80% 50%;
+  --status-pending: 37 90% 50%;
+  --status-completed: 145 63% 42%;
 }
 
 .dark {
-  --background: 224 14% 6%;
+  --background: 220 30% 7%;
   --foreground: 220 18% 96%;
-  --card: 224 14% 9%;
+  --card: 220 28% 10%;
   --card-foreground: 220 18% 96%;
-  --popover: 224 14% 9%;
+  --popover: 220 28% 10%;
   --popover-foreground: 220 18% 96%;
-  --primary: 43 68% 48%;
-  --primary-foreground: 224 14% 6%;
-  --secondary: 224 14% 13%;
+  --primary: 43 85% 52%;
+  --primary-foreground: 220 30% 7%;
+  --secondary: 220 28% 15%;
   --secondary-foreground: 220 18% 96%;
-  --muted: 224 12% 12%;
-  --muted-foreground: 220 12% 60%;
-  --accent: 43 68% 48%;
-  --accent-foreground: 224 14% 6%;
-  --border: 224 12% 16%;
-  --input: 224 12% 16%;
-  --ring: 43 68% 48%;
+  --muted: 220 20% 14%;
+  --muted-foreground: 220 12% 58%;
+  --accent: 43 85% 52%;
+  --accent-foreground: 220 30% 7%;
+  --border: 220 20% 18%;
+  --input: 220 20% 18%;
+  --ring: 43 85% 52%;
 }
 
 * {
@@ -71,97 +76,144 @@ html {
 body {
   background: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: "Inter", "Outfit", system-ui, -apple-system, sans-serif;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
   font-feature-settings: "cv11", "ss01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: rgba(212, 175, 55, 0.32);
+  background: rgba(212, 175, 55, 0.25);
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   Section tinting utilities
+   Layout utilities
    ───────────────────────────────────────────────────────────────── */
-.section-tint-navy {
-  background: linear-gradient(135deg, #0B1F3A 0%, #09192e 100%);
-}
-
-.section-tint-blue {
-  background: linear-gradient(135deg, hsl(224 18% 8%) 0%, hsl(224 14% 6%) 100%);
-}
-
-.section-tint-subtle {
-  background: linear-gradient(180deg, hsl(224 14% 7%) 0%, hsl(224 14% 6%) 100%);
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   Semantic status badge helpers
-   ───────────────────────────────────────────────────────────────── */
-.status-received {
-  background: rgba(14, 165, 233, 0.12);
-  color: #38bdf8;
-  border-color: rgba(14, 165, 233, 0.25);
-}
-
-.status-pending {
-  background: rgba(245, 158, 11, 0.12);
-  color: #fbbf24;
-  border-color: rgba(245, 158, 11, 0.25);
-}
-
-.status-completed {
-  background: rgba(34, 197, 94, 0.12);
-  color: #4ade80;
-  border-color: rgba(34, 197, 94, 0.25);
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   Card depth utilities
-   ───────────────────────────────────────────────────────────────── */
-.card-depth-1 {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  box-shadow: 0 1px 3px rgba(0,0,0,.25), 0 1px 2px rgba(0,0,0,.18);
-}
-
-.card-depth-2 {
-  background: hsl(224 14% 11%);
-  border: 1px solid hsl(224 12% 20%);
-  box-shadow: 0 4px 24px rgba(0,0,0,.3), 0 1px 3px rgba(0,0,0,.2);
-}
-
-.card-highlight {
-  background: linear-gradient(145deg, hsl(224 14% 11%), hsl(224 14% 9%));
-  border: 1px solid hsl(var(--border));
-  box-shadow: 0 0 0 1px rgba(212,175,55,.06), 0 4px 24px rgba(0,0,0,.3);
-}
-
-.glass {
-  background: rgba(5, 5, 5, 0.72);
-  backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-}
-
-.dark .glass {
-  background: rgba(5, 5, 5, 0.72);
-  border-color: rgba(255, 255, 255, 0.12);
+.container-pad {
+  @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
 }
 
 .focus-ring {
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
 }
 
-.container-pad {
-  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+/* ─────────────────────────────────────────────────────────────────
+   Section backgrounds
+   ───────────────────────────────────────────────────────────────── */
+.section-light {
+  background: #ffffff;
 }
 
-.video-panel {
-  transform: translateZ(0);
-  background: #050505;
+.section-muted {
+  background: hsl(220 14% 97%);
 }
 
+.section-navy {
+  background: hsl(215 60% 18%);
+  color: #ffffff;
+}
+
+.section-gold {
+  background: linear-gradient(135deg, hsl(43 85% 48%) 0%, hsl(38 90% 42%) 100%);
+  color: #ffffff;
+}
+
+.section-light-blue {
+  background: hsl(204 80% 97%);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Hero
+   ───────────────────────────────────────────────────────────────── */
+.hero-bg {
+  background: linear-gradient(135deg, hsl(215 60% 18%) 0%, hsl(215 55% 24%) 60%, hsl(204 60% 28%) 100%);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Cards
+   ───────────────────────────────────────────────────────────────── */
+.service-card {
+  background: #ffffff;
+  border: 1px solid hsl(220 13% 91%);
+  border-radius: var(--radius);
+  transition: box-shadow 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.service-card:hover {
+  box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
+  transform: translateY(-2px);
+  border-color: hsl(43 85% 45% / 0.4);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Accent helpers
+   ───────────────────────────────────────────────────────────────── */
+.text-gold {
+  color: hsl(43 85% 40%);
+}
+
+.bg-gold {
+  background: hsl(43 85% 45%);
+}
+
+.text-navy {
+  color: hsl(215 60% 18%);
+}
+
+.bg-navy {
+  background: hsl(215 60% 18%);
+}
+
+.accent-line {
+  display: inline-block;
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background: hsl(43 85% 45%);
+  margin-bottom: 1rem;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Status badges
+   ───────────────────────────────────────────────────────────────── */
+.status-received {
+  background: rgba(14, 165, 233, 0.10);
+  color: #0284c7;
+  border-color: rgba(14, 165, 233, 0.25);
+}
+
+.status-pending {
+  background: rgba(245, 158, 11, 0.10);
+  color: #d97706;
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+.status-completed {
+  background: rgba(34, 197, 94, 0.10);
+  color: #16a34a;
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Marquee
+   ───────────────────────────────────────────────────────────────── */
+.showcase-marquee {
+  animation: showcase-marquee 42s linear infinite;
+}
+
+.showcase-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Animations
+   ───────────────────────────────────────────────────────────────── */
 .kenburns {
   animation: kenburns 18s ease-in-out infinite alternate;
 }
@@ -177,75 +229,42 @@ body {
 .scanline {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(255, 255, 255, 0.12),
-    transparent
-  );
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.06), transparent);
   animation: scanline 4.5s ease-in-out infinite;
 }
 
-.showcase-marquee {
-  animation: showcase-marquee 42s linear infinite;
-}
-
-.showcase-marquee:hover {
-  animation-play-state: paused;
+.video-panel {
+  transform: translateZ(0);
+  background: hsl(215 60% 10%);
 }
 
 @keyframes kenburns {
-  from {
-    transform: scale(1) translate3d(0, 0, 0);
-  }
-  to {
-    transform: scale(1.14) translate3d(-2%, -2%, 0);
-  }
+  from { transform: scale(1) translate3d(0, 0, 0); }
+  to   { transform: scale(1.14) translate3d(-2%, -2%, 0); }
 }
 
 @keyframes pan-left {
-  from {
-    transform: scale(1.08) translateX(0);
-  }
-  to {
-    transform: scale(1.16) translateX(-6%);
-  }
+  from { transform: scale(1.08) translateX(0); }
+  to   { transform: scale(1.16) translateX(-6%); }
 }
 
 @keyframes pan-right {
-  from {
-    transform: scale(1.08) translateX(-5%);
-  }
-  to {
-    transform: scale(1.16) translateX(2%);
-  }
+  from { transform: scale(1.08) translateX(-5%); }
+  to   { transform: scale(1.16) translateX(2%); }
 }
 
 @keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  50%,
-  100% {
-    transform: translateY(100%);
-  }
+  0%       { transform: translateY(-100%); }
+  50%, 100%{ transform: translateY(100%); }
 }
 
 @keyframes showcase-marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kenburns,
-  .pan-left,
-  .pan-right,
-  .scanline,
-  .showcase-marquee {
+  .kenburns,.pan-left,.pan-right,.scanline,.showcase-marquee {
     animation: none;
   }
 }

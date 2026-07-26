@@ -2,108 +2,174 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, MessageCircle, ShipWheel, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
+import { ChevronDown, Mail, Menu, MessageCircle, Phone, X } from "lucide-react";
 import { whatsappUrl } from "@/lib/utils";
 
-const navItems = [
-  ["Services", "/#services"],
-  ["How It Works", "/#process"],
-  ["Gallery", "/#gallery"],
-  ["Blog", "/blog"],
-  ["Track", "/track"],
-  ["Admin", "/admin"]
+const services = [
+  ["Customs Clearance", "/#services"],
+  ["Duty Processing", "/#services"],
+  ["Clearing & Forwarding", "/#services"],
+  ["Fleet Clearance", "/#services"],
+  ["Cargo Handling", "/#services"],
+  ["Fast Track Assistance", "/#services"]
+];
+
+const industries = [
+  ["Automobile Imports", "/#services"],
+  ["Oil & Gas Equipment", "/#services"],
+  ["Agricultural Machinery", "/#services"],
+  ["Industrial Equipment", "/#services"],
+  ["Government & Military", "/#services"],
+  ["Corporate Fleets", "/#services"]
 ];
 
 export function SiteHeader() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const [industriesOpen, setIndustriesOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b bg-background/85 backdrop-blur-xl">
-      <div className="container-pad flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-3 font-semibold">
-          <span className="grid h-10 w-10 place-items-center rounded-lg bg-navy text-white shadow-glow">
-            <ShipWheel className="h-5 w-5 text-gold" />
-          </span>
-          <span className="leading-tight">
-            OLADECK
-            <span className="block text-xs font-medium text-muted-foreground">Global Services</span>
-          </span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-1 lg:flex">
-          {navItems.map(([label, href]) => (
-            <Link
-              key={href}
-              href={href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition hover:bg-muted hover:text-foreground"
-            >
-              {label}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Action Controls */}
-        <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button asChild className="hidden sm:inline-flex">
-            <Link href="/quote">Get a Quote</Link>
-          </Button>
-          <Button asChild variant="secondary" size="icon" aria-label="Chat on WhatsApp">
-            <a href={whatsappUrl("Hello OLADECK Global Services, I need help clearing an imported vehicle.")}>
-              <MessageCircle className="h-4 w-4" />
+    <header className="sticky top-0 z-50 w-full bg-white shadow-sm border-b border-gray-100">
+      {/* Top bar */}
+      <div className="bg-navy text-white">
+        <div className="container-pad flex items-center justify-between py-1.5 text-xs">
+          <span className="hidden sm:block text-white/70">OLADECK Global Services — Nigeria&apos;s Most Trusted Vehicle Clearing Company</span>
+          <div className="flex items-center gap-4 ml-auto">
+            <a href="tel:+2348172973820" className="flex items-center gap-1.5 text-white/85 hover:text-white transition">
+              <Phone className="h-3 w-3" /> +234 817 297 3820
             </a>
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            className="lg:hidden"
-            onClick={() => setMobileMenuOpen((open) => !open)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
+            <a href="mailto:biona4real@gmail.com" className="flex items-center gap-1.5 text-white/85 hover:text-white transition">
+              <Mail className="h-3 w-3" /> biona4real@gmail.com
+            </a>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Drawer Menu */}
-      {mobileMenuOpen ? (
-        <div className="fixed inset-0 top-16 z-50 bg-background/95 backdrop-blur-2xl lg:hidden">
-          <div className="container-pad flex flex-col gap-6 py-6">
-            <nav className="flex flex-col gap-2">
-              {navItems.map(([label, href]) => (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-lg px-4 py-3 text-lg font-medium text-foreground transition hover:bg-muted"
-                >
-                  {label}
-                </Link>
-              ))}
-            </nav>
+      {/* Main nav */}
+      <div className="container-pad flex h-16 items-center justify-between gap-6">
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3 shrink-0">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy">
+            <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 text-gold" stroke="hsl(43 85% 45%)" strokeWidth="1.8">
+              <path d="M3 18l2-12h14l2 12H3z" />
+              <path d="M7 18v2M17 18v2" />
+              <circle cx="8" cy="18" r="1.5" fill="hsl(43 85% 45%)" stroke="none" />
+              <circle cx="16" cy="18" r="1.5" fill="hsl(43 85% 45%)" stroke="none" />
+              <path d="M2 10h20" strokeWidth="1.4" />
+            </svg>
+          </div>
+          <div className="leading-tight">
+            <p className="text-sm font-extrabold tracking-tight text-navy uppercase">OLADECK</p>
+            <p className="text-[10px] font-semibold text-muted-foreground tracking-widest uppercase">Global Services</p>
+          </div>
+        </Link>
 
-            <div className="grid gap-3 pt-4 border-t">
-              <Button asChild size="lg" className="w-full">
-                <Link href="/quote" onClick={() => setMobileMenuOpen(false)}>
-                  Get a Clearing Quote
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="w-full">
-                <a
-                  href={whatsappUrl("Hello OLADECK Global Services, I need assistance with vehicle clearing.")}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  <MessageCircle className="mr-2 h-5 w-5" />
-                  Chat on WhatsApp
-                </a>
-              </Button>
+        {/* Desktop nav */}
+        <nav className="hidden items-center gap-1 lg:flex">
+          <Link href="/#about" className="px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
+            About Us
+          </Link>
+
+          {/* Services dropdown */}
+          <div className="relative" onMouseEnter={() => setServicesOpen(true)} onMouseLeave={() => setServicesOpen(false)}>
+            <button className="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
+              Services <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+            {servicesOpen && (
+              <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-lg shadow-lifted border border-border py-1 z-50">
+                {services.map(([label, href]) => (
+                  <Link key={label} href={href} className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-navy transition">
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Industries dropdown */}
+          <div className="relative" onMouseEnter={() => setIndustriesOpen(true)} onMouseLeave={() => setIndustriesOpen(false)}>
+            <button className="flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
+              Industries <ChevronDown className="h-3.5 w-3.5" />
+            </button>
+            {industriesOpen && (
+              <div className="absolute top-full left-0 mt-1 w-52 bg-white rounded-lg shadow-lifted border border-border py-1 z-50">
+                {industries.map(([label, href]) => (
+                  <Link key={label} href={href} className="block px-4 py-2.5 text-sm text-foreground hover:bg-muted hover:text-navy transition">
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <Link href="/blog" className="px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
+            Blog
+          </Link>
+          <Link href="/track" className="px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
+            Track
+          </Link>
+          <Link href="/contact" className="px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
+            Contact
+          </Link>
+        </nav>
+
+        {/* CTA row */}
+        <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <a
+            href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle.")}
+            className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1db854] transition shadow-sm"
+          >
+            <MessageCircle className="h-4 w-4" /> WhatsApp
+          </a>
+          <Link
+            href="/quote"
+            className="rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy/90 transition shadow-sm"
+          >
+            Get a Quote
+          </Link>
+        </div>
+
+        {/* Hamburger */}
+        <button
+          className="lg:hidden p-2 rounded-lg hover:bg-muted transition"
+          onClick={() => setMobileOpen((o) => !o)}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </div>
+
+      {/* Mobile drawer */}
+      {mobileOpen && (
+        <div className="fixed inset-0 top-[105px] z-40 bg-white/95 backdrop-blur-xl overflow-y-auto lg:hidden">
+          <div className="container-pad py-6 flex flex-col gap-2">
+            <Link href="/#about" onClick={() => setMobileOpen(false)} className="py-3 px-4 rounded-lg text-base font-medium hover:bg-muted transition">About Us</Link>
+            <p className="px-4 pt-2 pb-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Services</p>
+            {services.map(([label, href]) => (
+              <Link key={label} href={href} onClick={() => setMobileOpen(false)} className="py-2.5 px-6 rounded-lg text-sm hover:bg-muted transition">{label}</Link>
+            ))}
+            <p className="px-4 pt-2 pb-1 text-xs font-semibold uppercase tracking-widest text-muted-foreground">Industries</p>
+            {industries.map(([label, href]) => (
+              <Link key={label} href={href} onClick={() => setMobileOpen(false)} className="py-2.5 px-6 rounded-lg text-sm hover:bg-muted transition">{label}</Link>
+            ))}
+            <Link href="/blog" onClick={() => setMobileOpen(false)} className="py-3 px-4 rounded-lg text-base font-medium hover:bg-muted transition">Blog</Link>
+            <Link href="/track" onClick={() => setMobileOpen(false)} className="py-3 px-4 rounded-lg text-base font-medium hover:bg-muted transition">Track Shipment</Link>
+            <Link href="/contact" onClick={() => setMobileOpen(false)} className="py-3 px-4 rounded-lg text-base font-medium hover:bg-muted transition">Contact</Link>
+            <div className="pt-4 grid gap-3 border-t">
+              <a
+                href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle.")}
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] py-3 text-sm font-semibold text-white"
+              >
+                <MessageCircle className="h-4 w-4" /> Chat on WhatsApp
+              </a>
+              <Link href="/quote" onClick={() => setMobileOpen(false)} className="flex items-center justify-center rounded-full bg-navy py-3 text-sm font-semibold text-white">
+                Get a Clearing Quote
+              </Link>
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </header>
   );
 }
