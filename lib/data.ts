@@ -339,6 +339,24 @@ export const blogPosts = [
 ];
 
 export const quoteRecords: QuoteRecord[] = [
+  {
+    trackingNumber: "CLR-2026-000001",
+    customer: "Chukwuma Adebayo",
+    phone: "+234 817 297 3820",
+    email: "customer@example.com",
+    vehicle: "2020 Toyota Camry",
+    status: "Pending",
+    estimatedCompletion: "Estimated completion: 5-6 working days after arrival at Tin Can Island Port."
+  },
+  {
+    trackingNumber: "CLR-2026-000002",
+    customer: "Emeka Okafor",
+    phone: "+234 802 345 6789",
+    email: "emeka@example.com",
+    vehicle: "2018 Lexus RX 350",
+    status: "Received by Customer",
+    estimatedCompletion: "Successfully cleared and delivered to Lagos metro."
+  }
 ];
 
 export const defaultPriceList: PriceItem[] = [
