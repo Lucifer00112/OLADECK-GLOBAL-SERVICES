@@ -102,7 +102,7 @@ export function AiAssistant() {
                   <Link href="/quote">Request Quote</Link>
                 </Button>
                 <Button asChild variant="secondary" size="sm">
-                  <a href={whatsappUrl("Hello MG Enterprises, I need assistance with vehicle clearing.")}>
+                  <a href={whatsappUrl("Hello OLADECK Global Services, I need assistance with vehicle clearing.")}>
                     WhatsApp
                   </a>
                 </Button>

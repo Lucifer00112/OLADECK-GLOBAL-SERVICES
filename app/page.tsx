@@ -24,7 +24,6 @@ import { MotionHeroReel } from "@/components/marketing/motion-hero-reel";
 import { VehicleShowcase } from "@/components/marketing/vehicle-showcase";
 import { DocumentChecklist } from "@/components/tools/document-checklist";
 import { DutyEstimator } from "@/components/tools/duty-estimator";
-import { CarCatalogSearch } from "@/components/tools/car-catalog-search";
 import {
   blogPosts,
   faqs,
@@ -98,7 +97,7 @@ export default function HomePage() {
               Fast, Reliable & Trusted Vehicle Clearing Services in Nigeria
             </h1>
             <p className="mt-4 max-w-2xl text-base leading-relaxed text-white/80 md:text-lg">
-              MG Enterprises clears imported vehicles through Nigerian ports with speed, transparency, and professional handling from documentation to release and delivery.
+              OLADECK Global Services clears imported vehicles through Nigerian ports with speed, transparency, and professional handling from documentation to release and delivery.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Button asChild size="lg" variant="secondary" className="font-semibold">
@@ -110,7 +109,7 @@ export default function HomePage() {
                 variant="outline"
                 className="border-white/25 bg-white/10 text-white hover:bg-white/20 font-semibold"
               >
-                <a href={whatsappUrl("Hello MG Enterprises, I would like a quote for vehicle clearing.")}>
+                <a href={whatsappUrl("Hello OLADECK Global Services, I would like to clear a vehicle.")}>
                   Chat on WhatsApp <MessageCircle className="ml-1.5 h-4 w-4" />
                 </a>
               </Button>
@@ -196,7 +195,35 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 5. QUOTE PLANNING & TOOLS (Estimator & Checklist) */}
+      {/* 5. DIRECT WHATSAPP CONSULTATION CALLOUT (Replaces Car Search) */}
+      <section className="py-14 md:py-20 section-tint-navy text-white relative isolate overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_90%_20%,rgba(212,175,55,.18),transparent_50%)]" />
+        <div className="container-pad">
+          <div className="mx-auto max-w-3xl text-center">
+            <Badge className="border-gold/40 bg-gold/15 text-gold text-xs py-1 px-3">
+              Direct WhatsApp Pricing & Quote
+            </Badge>
+            <h2 className="mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Have a Vehicle to Clear?
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-white/80 md:text-lg">
+              Send us a direct message on WhatsApp with your vehicle details—Make, Model, Year, and Arrival Port—and our team will review your specs and discuss clearing prices instantly.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Button asChild size="lg" variant="secondary" className="w-full sm:w-auto font-bold text-base px-8">
+                <a href={whatsappUrl("Hello OLADECK Global Services, I want to clear my car. Here are the details:\n\n- Make & Model:\n- Year:\n- Shipping Port:")}>
+                  <MessageCircle className="mr-2 h-5 w-5" /> Chat on WhatsApp Now
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto border-white/25 bg-white/10 text-white hover:bg-white/20 font-semibold">
+                <Link href="/quote">Submit Request Online</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. QUOTE PLANNING & TOOLS (Estimator & Checklist) */}
       <section className="py-14 md:py-20 section-tint-blue border-y border-border/30">
         <div className="container-pad grid gap-10 lg:grid-cols-[.9fr_1.1fr] lg:items-start">
           <div>
@@ -220,11 +247,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 6. VEHICLE SHOWCASE & CATALOG SEARCH */}
+      {/* 7. VEHICLE SHOWCASE & GALLERY */}
       <VehicleShowcase />
-      <CarCatalogSearch />
-
-      {/* 7. REAL-TIME WORKFLOW & GALLERY */}
       <Gallery items={galleryItems} />
 
       <section className="section-tint-subtle border-t border-border/30 py-14 md:py-20">
@@ -235,7 +259,7 @@ export default function HomePage() {
               No Blind Spots. Track Your Import Status Live.
             </h2>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              After submitting your clearing request, receive your CLR tracking number to monitor port progress, customs verification, and release milestones.
+              After submitting your clearing request, receive your tracking number to monitor port progress, customs verification, and release milestones.
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-3">

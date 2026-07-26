@@ -7,7 +7,7 @@ import { whatsappUrl } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Contact MG Enterprises for vehicle clearing, forwarding, duty assistance, and port logistics."
+  description: "Contact OLADECK Global Services for vehicle clearing, forwarding, duty assistance, and port logistics."
 };
 
 export default function ContactPage() {
@@ -41,7 +41,7 @@ export default function ContactPage() {
           </div>
           <a
             className="mt-6 inline-flex rounded-lg bg-secondary px-5 py-3 text-sm font-semibold text-secondary-foreground"
-            href={whatsappUrl("Hello MG Enterprises, please call me about vehicle clearing.")}
+            href={whatsappUrl("Hello OLADECK Global Services, please call me about vehicle clearing.")}
           >
             Chat on WhatsApp
           </a>

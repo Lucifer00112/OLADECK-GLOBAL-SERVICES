@@ -1,6 +1,6 @@
-# MG Enterprises
+# OLADECK Global Services
 
-Premium Next.js 15 platform for a Nigerian imported-vehicle clearing and forwarding company.
+Premium Next.js 15 platform for OLADECK Global Services — a Nigerian imported-vehicle clearing and forwarding company.
 
 ## Stack
 

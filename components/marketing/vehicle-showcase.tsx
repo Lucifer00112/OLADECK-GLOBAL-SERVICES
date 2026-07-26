@@ -14,7 +14,7 @@ export function VehicleShowcase() {
             </h2>
           </div>
           <p className="max-w-md text-sm leading-6 text-white/65">
-            MG Enterprises focuses on the everyday imported cars Nigerian buyers and dealers actually move: sedans, compact SUVs, buses, pickups, and family vans.
+            OLADECK Global Services focuses on the everyday imported cars Nigerian buyers and dealers actually move: sedans, compact SUVs, buses, pickups, and family vans.
           </p>
         </div>
       </div>

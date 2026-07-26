@@ -3,7 +3,7 @@ import { TrackingDashboard } from "@/components/tracking/tracking-dashboard";
 
 export const metadata: Metadata = {
   title: "Track Vehicle Clearing Progress",
-  description: "Track an MG Enterprises vehicle clearing quote, timeline, documents, and payment status."
+  description: "Track an OLADECK Global Services vehicle clearing quote, timeline, documents, and payment status."
 };
 
 export default async function TrackPage({

@@ -15,8 +15,8 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: {
-    default: "MG Enterprises | Vehicle Clearing and Forwarding",
-    template: "%s | MG Enterprises"
+    default: "OLADECK Global Services | Vehicle Clearing and Forwarding",
+    template: "%s | OLADECK Global Services"
   },
   description:
     "Premium Nigerian vehicle clearing and forwarding for imported cars, SUVs, luxury vehicles, auction cars, and corporate fleets.",
@@ -25,14 +25,15 @@ export const metadata: Metadata = {
     "customs clearance",
     "imported cars Nigeria",
     "Lagos port clearing",
-    "Tin Can vehicle clearance"
+    "Tin Can vehicle clearance",
+    "OLADECK Global Services"
   ],
   openGraph: {
     title: "Fast, Reliable & Trusted Vehicle Clearing Services in Nigeria",
     description:
       "Clear imported vehicles through Nigerian ports with speed, transparency, and professional support.",
     url: "/",
-    siteName: "MG Enterprises",
+    siteName: "OLADECK Global Services",
     images: [
       {
         url: "https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?auto=format&fit=crop&w=1600&q=80",
@@ -46,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "MG Enterprises",
+    title: "OLADECK Global Services",
     description: "Premium imported vehicle clearing and forwarding in Nigeria."
   },
   alternates: {
@@ -64,7 +65,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const organizationJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: "MG Enterprises",
+    name: "OLADECK Global Services",
     areaServed: "Nigeria",
     telephone: "+234 817 297 3820",
     email: "biona4real@gmail.com",

@@ -59,7 +59,7 @@ export default function AdminLoginPage() {
           <CardTitle className="text-2xl font-bold">Admin Verification</CardTitle>
           <p className="mt-1 text-sm text-muted-foreground">
             {step === "passcode"
-              ? "Step 1 of 2: Enter MG Enterprises Admin Passcode"
+              ? "Step 1 of 2: Enter OLADECK Global Services Admin Passcode"
               : "Step 2 of 2: Enter 6-digit Verification Code"}
           </p>
         </CardHeader>

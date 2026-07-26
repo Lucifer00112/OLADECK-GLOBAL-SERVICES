@@ -10,7 +10,6 @@ import { whatsappUrl } from "@/lib/utils";
 const navItems = [
   ["Services", "/#services"],
   ["How It Works", "/#process"],
-  ["Vehicle Catalog", "/#catalog"],
   ["Gallery", "/#gallery"],
   ["Blog", "/blog"],
   ["Track", "/track"],
@@ -28,8 +27,8 @@ export function SiteHeader() {
             <ShipWheel className="h-5 w-5 text-gold" />
           </span>
           <span className="leading-tight">
-            MG Enterprises
-            <span className="block text-xs font-medium text-muted-foreground">Nigeria Clearing</span>
+            OLADECK
+            <span className="block text-xs font-medium text-muted-foreground">Global Services</span>
           </span>
         </Link>
 
@@ -53,7 +52,7 @@ export function SiteHeader() {
             <Link href="/quote">Get a Quote</Link>
           </Button>
           <Button asChild variant="secondary" size="icon" aria-label="Chat on WhatsApp">
-            <a href={whatsappUrl("Hello MG Enterprises, I need help clearing an imported vehicle.")}>
+            <a href={whatsappUrl("Hello OLADECK Global Services, I need help clearing an imported vehicle.")}>
               <MessageCircle className="h-4 w-4" />
             </a>
           </Button>
@@ -94,7 +93,7 @@ export function SiteHeader() {
               </Button>
               <Button asChild variant="outline" size="lg" className="w-full">
                 <a
-                  href={whatsappUrl("Hello MG Enterprises, I need assistance with vehicle clearing.")}
+                  href={whatsappUrl("Hello OLADECK Global Services, I need assistance with vehicle clearing.")}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <MessageCircle className="mr-2 h-5 w-5" />

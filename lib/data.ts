@@ -8,7 +8,7 @@ import type {
 } from "@/lib/types";
 import { vehicleCatalog } from "@/lib/vehicle-catalog";
 
-export const companyName = "MG Enterprises";
+export const companyName = "OLADECK Global Services";
 
 export const clearingStatuses: ClearingStatus[] = [
   "Received",

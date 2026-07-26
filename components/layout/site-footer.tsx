@@ -14,7 +14,7 @@ const footerLinks = {
     ["Customs Clearance", "/#services"],
     ["Duty Processing", "/#services"],
     ["Fleet Clearance", "/#services"],
-    ["Fast Track", "/#services"]
+    ["Fast Track Clearance", "/#services"]
   ],
   Legal: [
     ["Privacy Policy", "/privacy"],
@@ -33,8 +33,8 @@ export function SiteFooter() {
               <ShipWheel className="h-5 w-5 text-gold" />
             </span>
             <div>
-              <p className="font-semibold">MG Enterprises</p>
-              <p className="text-sm text-white/65">Imported vehicle clearing, handled with precision.</p>
+              <p className="font-semibold text-lg">OLADECK Global Services</p>
+              <p className="text-sm text-white/65">Imported vehicle clearing & forwarding, handled with precision.</p>
             </div>
           </div>
           <div className="grid gap-3 text-sm text-white/70 sm:grid-cols-3">
@@ -45,9 +45,9 @@ export function SiteFooter() {
         </div>
 
         <div className="rounded-lg border border-white/10 bg-white/8 p-5 shadow-glow">
-          <p className="text-sm font-semibold">Port intelligence newsletter</p>
+          <p className="text-sm font-semibold">Port Intelligence & Price Updates</p>
           <p className="mt-2 text-sm text-white/65">
-            Monthly import tips, port alerts, and customs documentation reminders.
+            Direct clearing updates, customs notes, and vehicle import advisories on WhatsApp.
           </p>
           <form className="mt-4 flex gap-2">
             <Input
@@ -79,7 +79,7 @@ export function SiteFooter() {
       </div>
 
       <div className="container-pad border-t border-white/10 py-5 text-sm text-white/55">
-        Copyright 2026 MG Enterprises. All rights reserved.
+        Copyright 2026 OLADECK Global Services. All rights reserved.
       </div>
     </footer>
   );

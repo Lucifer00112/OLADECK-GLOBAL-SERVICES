@@ -7,7 +7,7 @@ export function MotionHeroReel() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(201,162,39,.28),transparent_30%),radial-gradient(circle_at_80%_0%,rgba(255,255,255,.16),transparent_28%)]" />
       <div className="relative grid gap-3">
         <div className="flex items-center justify-between">
-          <Badge className="border-white/20 bg-white/10 text-gold">MG Live Motion Reel</Badge>
+          <Badge className="border-white/20 bg-white/10 text-gold">OLADECK Live Motion Reel</Badge>
           <span className="flex items-center gap-2 text-xs text-white/70">
             <span className="h-2 w-2 animate-pulse rounded-full bg-gold" /> moving background
           </span>

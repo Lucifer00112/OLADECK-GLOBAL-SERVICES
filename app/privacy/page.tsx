@@ -8,7 +8,7 @@ export default function PrivacyPage() {
       <div className="max-w-3xl space-y-4">
         <h1 className="text-3xl font-semibold tracking-normal">Privacy Policy</h1>
         <p className="leading-7 text-muted-foreground">
-          MG Enterprises collects customer, vehicle, shipping, document, and payment records only for quote processing,
+          OLADECK Global Services collects customer, vehicle, shipping, document, and payment records only for quote processing,
           customs support, communication, compliance, and service improvement.
         </p>
         <p className="leading-7 text-muted-foreground">

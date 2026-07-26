@@ -109,7 +109,7 @@ export async function submitQuote(
   }
 
   const whatsappMessage = [
-    "MG Enterprises import request",
+    "OLADECK Global Services import request",
     `Tracking: ${trackingNumber}`,
     `Customer: ${parsed.data.name}`,
     `Phone: ${parsed.data.phone}`,
@@ -150,6 +150,6 @@ export async function submitQuote(
       notes: parsed.data.notes
     },
     message:
-      "Your request is ready. Send the prepared details to WhatsApp so MG Enterprises can continue the transaction there."
+      "Your request is ready. Send the prepared details to WhatsApp so OLADECK Global Services can continue the transaction there."
   };
 }

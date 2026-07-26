@@ -50,7 +50,7 @@ export function TrackingDashboard({ initialTracking }: { initialTracking?: strin
           <Input
             value={tracking}
             onChange={(event) => setTracking(event.target.value)}
-            placeholder="Enter your MG tracking number"
+            placeholder="Enter your CLR tracking number"
             aria-label="Tracking number"
           />
           <Button type="button" onClick={() => setSearchedTracking(tracking)}>
@@ -65,7 +65,7 @@ export function TrackingDashboard({ initialTracking }: { initialTracking?: strin
             <Clock3 className="mx-auto h-8 w-8 text-gold" />
             <h2 className="text-xl font-semibold">No live request found yet</h2>
             <p className="text-sm text-muted-foreground">
-              Submit a quote first, then use the generated tracking number here. MG Enterprises will continue transactions on WhatsApp.
+              Submit a quote first, then use the generated tracking number here. OLADECK Global Services will continue transactions on WhatsApp.
             </p>
           </CardContent>
         </Card>
@@ -107,7 +107,7 @@ export function TrackingDashboard({ initialTracking }: { initialTracking?: strin
                       <p className="font-medium">{status}</p>
                       <p className="text-sm text-muted-foreground">
                         {status === "Received"
-                          ? "MG Enterprises has received your request."
+                          ? "OLADECK Global Services has received your request."
                           : status === "Pending"
                             ? "Please wait. After the vehicle arrives in Nigeria, clearing normally takes 5-6 working days and can take more if there are port or customs delays."
                             : "Tap the confirmation button only when the car has reached you."}
@@ -134,7 +134,7 @@ export function TrackingDashboard({ initialTracking }: { initialTracking?: strin
               <CardContent className="grid gap-3">
                 <Button asChild>
                   <a
-                    href={whatsappUrl(`Hello MG Enterprises, I want to discuss tracking ${record.trackingNumber} for ${record.vehicle}.`)}
+                    href={whatsappUrl(`Hello OLADECK Global Services, I want to discuss tracking ${record.trackingNumber} for ${record.vehicle}.`)}
                     target="_blank"
                     rel="noreferrer"
                   >
