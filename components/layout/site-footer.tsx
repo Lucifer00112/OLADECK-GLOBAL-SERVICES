@@ -8,6 +8,8 @@ const footerLinks = {
     ["About Us", "/#about"],
     ["Get a Quote", "/quote"],
     ["Track Shipment", "/track"],
+    ["Customer Sign In", "/login"],
+    ["Create Account", "/signup"],
     ["Admin Portal", "/admin"]
   ],
   Services: [

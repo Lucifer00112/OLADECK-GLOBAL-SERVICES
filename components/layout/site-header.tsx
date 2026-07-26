@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronDown, Mail, Menu, MessageCircle, Phone, X } from "lucide-react";
+import { ChevronDown, Mail, Menu, MessageCircle, Phone, User, X } from "lucide-react";
 import { whatsappUrl } from "@/lib/utils";
 
 const services = [
@@ -41,6 +41,9 @@ export function SiteHeader() {
             <a href="mailto:biona4real@gmail.com" className="flex items-center gap-1.5 text-white/85 hover:text-white transition">
               <Mail className="h-3 w-3" /> biona4real@gmail.com
             </a>
+            <Link href="/login" className="flex items-center gap-1 text-gold font-semibold hover:underline border-l border-white/20 pl-4 ml-1">
+              <User className="h-3 w-3" /> Sign In
+            </Link>
           </div>
         </div>
       </div>
@@ -115,6 +118,12 @@ export function SiteHeader() {
 
         {/* CTA row */}
         <div className="hidden lg:flex items-center gap-2 shrink-0">
+          <Link
+            href="/login"
+            className="rounded-full border border-navy/20 px-4 py-2 text-sm font-semibold text-navy hover:bg-muted transition"
+          >
+            Sign In
+          </Link>
           <a
             href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle.")}
             className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1db854] transition shadow-sm"
@@ -156,6 +165,12 @@ export function SiteHeader() {
             <Link href="/track" onClick={() => setMobileOpen(false)} className="py-3 px-4 rounded-lg text-base font-medium hover:bg-muted transition">Track Shipment</Link>
             <Link href="/contact" onClick={() => setMobileOpen(false)} className="py-3 px-4 rounded-lg text-base font-medium hover:bg-muted transition">Contact</Link>
             <div className="pt-4 grid gap-3 border-t">
+              <Link href="/login" onClick={() => setMobileOpen(false)} className="flex items-center justify-center rounded-full border border-navy/20 py-3 text-sm font-semibold text-navy">
+                Customer Sign In
+              </Link>
+              <Link href="/signup" onClick={() => setMobileOpen(false)} className="flex items-center justify-center rounded-full bg-navy/10 py-3 text-sm font-semibold text-navy">
+                Create Account
+              </Link>
               <a
                 href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle.")}
                 onClick={() => setMobileOpen(false)}
