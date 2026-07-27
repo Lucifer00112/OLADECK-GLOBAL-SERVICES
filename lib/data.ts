@@ -316,7 +316,8 @@ export const blogPosts = [
       "A practical list of customs, shipping, and ownership documents to prepare before your vehicle arrives.",
     category: "Import Tips",
     date: "2026-07-10",
-    readTime: "5 min read"
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=600&q=85"
   },
   {
     slug: "how-to-estimate-import-duty",
@@ -325,7 +326,8 @@ export const blogPosts = [
       "Understand the variables that influence duty, port charges, terminal fees, and delivery coordination.",
     category: "Duty Guidance",
     date: "2026-06-28",
-    readTime: "6 min read"
+    readTime: "6 min read",
+    image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=600&q=85"
   },
   {
     slug: "lagos-port-update-july-2026",
@@ -334,7 +336,8 @@ export const blogPosts = [
       "Recent operational notes for vehicle importers using Apapa, Tin Can Island, and PTML.",
     category: "Port Updates",
     date: "2026-07-01",
-    readTime: "3 min read"
+    readTime: "3 min read",
+    image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=85"
   }
 ];
 

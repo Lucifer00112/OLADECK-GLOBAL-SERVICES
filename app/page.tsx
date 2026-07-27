@@ -484,9 +484,14 @@ export default function HomePage() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {blogPosts.map((post) => (
-              <div key={post.slug} className="service-card overflow-hidden">
-                <div className="h-36 bg-gradient-to-br from-navy to-navy/70 flex items-center justify-center">
-                  <Ship className="h-12 w-12 text-white/30" />
+              <div key={post.slug} className="service-card overflow-hidden group">
+                <div className="h-44 overflow-hidden relative">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
                 </div>
                 <div className="p-5">
                   <span className="inline-block rounded-full bg-gold/12 text-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 mb-3">

@@ -27,9 +27,14 @@ export default function BlogPage() {
 
         <div className="mt-10 grid gap-5 md:grid-cols-3">
           {blogPosts.map((post) => (
-            <Card key={post.slug} className="service-card overflow-hidden transition hover:-translate-y-1 hover:shadow-lifted">
-              <div className="h-36 bg-gradient-to-br from-navy to-navy/70 flex items-center justify-center">
-                <Ship className="h-12 w-12 text-white/30" />
+            <Card key={post.slug} className="service-card overflow-hidden transition hover:-translate-y-1 hover:shadow-lifted group">
+              <div className="h-44 overflow-hidden relative">
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
               </div>
               <CardContent className="p-5">
                 <Badge className="bg-gold/12 text-gold border-gold/25 text-[10px] font-bold uppercase tracking-wider">{post.category}</Badge>

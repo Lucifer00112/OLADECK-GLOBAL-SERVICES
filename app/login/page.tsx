@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useEffect, useActionState } from "react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowRight, Lock, LogIn, Mail, Ship } from "lucide-react";
 import { AuthActionResult, loginAction } from "@/app/auth/actions";
@@ -11,7 +12,18 @@ import { Input } from "@/components/ui/input";
 const initialState: AuthActionResult = { ok: false, message: "" };
 
 export default function CustomerLoginPage() {
+  const router = useRouter();
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
+
+  useEffect(() => {
+    if (state.ok) {
+      const timer = setTimeout(() => {
+        router.push("/portal");
+        router.refresh();
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [state.ok, router]);
 
   return (
     <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center bg-muted/30 py-16 px-4">
@@ -70,8 +82,8 @@ export default function CustomerLoginPage() {
               />
             </div>
 
-            <Button type="submit" disabled={isPending} className="mt-2 w-full bg-navy text-white hover:bg-navy/90 font-bold">
-              {isPending ? "Signing In..." : "Sign In to Account"}
+            <Button type="submit" disabled={isPending || state.ok} className="mt-2 w-full bg-navy text-white hover:bg-navy/90 font-bold">
+              {isPending ? "Signing In..." : state.ok ? "Redirecting to Portal..." : "Sign In to Account"}
               <LogIn className="ml-2 h-4 w-4" />
             </Button>
 

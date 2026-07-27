@@ -44,6 +44,9 @@ export function SiteHeader() {
             <Link href="/login" className="flex items-center gap-1 text-gold font-semibold hover:underline border-l border-white/20 pl-4 ml-1">
               <User className="h-3 w-3" /> Sign In
             </Link>
+            <Link href="/signup" className="flex items-center gap-1 text-white/90 font-semibold hover:underline">
+              Register
+            </Link>
           </div>
         </div>
       </div>
@@ -120,19 +123,25 @@ export function SiteHeader() {
         <div className="hidden lg:flex items-center gap-2 shrink-0">
           <Link
             href="/login"
-            className="rounded-full border border-navy/20 px-4 py-2 text-sm font-semibold text-navy hover:bg-muted transition"
+            className="rounded-full border border-navy/20 px-3.5 py-1.5 text-xs font-semibold text-navy hover:bg-muted transition"
           >
             Sign In
           </Link>
+          <Link
+            href="/signup"
+            className="rounded-full bg-gold/15 border border-gold/30 px-3.5 py-1.5 text-xs font-bold text-navy hover:bg-gold/25 transition"
+          >
+            Sign Up
+          </Link>
           <a
             href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle.")}
-            className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white hover:bg-[#1db854] transition shadow-sm"
+            className="flex items-center gap-1.5 rounded-full bg-[#25D366] px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-[#1db854] transition shadow-sm"
           >
-            <MessageCircle className="h-4 w-4" /> WhatsApp
+            <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
           </a>
           <Link
             href="/quote"
-            className="rounded-full bg-navy px-4 py-2 text-sm font-semibold text-white hover:bg-navy/90 transition shadow-sm"
+            className="rounded-full bg-navy px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-navy/90 transition shadow-sm"
           >
             Get a Quote
           </Link>
