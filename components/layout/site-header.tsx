@@ -55,15 +55,11 @@ export function SiteHeader() {
       <div className="container-pad flex h-16 items-center justify-between gap-6">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 shrink-0">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-navy">
-            <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6 text-gold" stroke="hsl(43 85% 45%)" strokeWidth="1.8">
-              <path d="M3 18l2-12h14l2 12H3z" />
-              <path d="M7 18v2M17 18v2" />
-              <circle cx="8" cy="18" r="1.5" fill="hsl(43 85% 45%)" stroke="none" />
-              <circle cx="16" cy="18" r="1.5" fill="hsl(43 85% 45%)" stroke="none" />
-              <path d="M2 10h20" strokeWidth="1.4" />
-            </svg>
-          </div>
+          <img
+            src="/logo.png"
+            alt="OLADECK Global Services Logo"
+            className="h-11 w-11 object-contain rounded-full shadow-sm"
+          />
           <div className="leading-tight">
             <p className="text-sm font-extrabold tracking-tight text-navy uppercase">OLADECK</p>
             <p className="text-[10px] font-semibold text-muted-foreground tracking-widest uppercase">Global Services</p>

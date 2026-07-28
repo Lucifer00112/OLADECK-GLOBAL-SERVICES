@@ -53,8 +53,8 @@ export default function AdminLoginPage() {
     <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center bg-muted/40 py-16 px-4">
       <Card className="w-full max-w-md shadow-glow">
         <CardHeader className="text-center">
-          <div className="mx-auto mb-3 grid h-12 w-12 place-items-center rounded-xl bg-navy text-white shadow-md">
-            <ShipWheel className="h-6 w-6 text-gold" />
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-navy/5 p-1 shadow-sm">
+            <img src="/logo.png" alt="OLADECK Logo" className="h-full w-full object-contain rounded-full" />
           </div>
           <CardTitle className="text-2xl font-bold">Admin Verification</CardTitle>
           <p className="mt-1 text-sm text-muted-foreground">

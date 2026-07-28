@@ -64,9 +64,11 @@ export function SiteFooter() {
           {/* Brand col */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10">
-                <Ship className="h-5 w-5 text-gold" />
-              </div>
+              <img
+                src="/logo.png"
+                alt="OLADECK Global Services Logo"
+                className="h-11 w-11 object-contain rounded-full shadow-sm"
+              />
               <div>
                 <p className="font-extrabold tracking-tight uppercase text-white">OLADECK</p>
                 <p className="text-[10px] font-semibold tracking-widest text-white/55 uppercase">Global Services</p>

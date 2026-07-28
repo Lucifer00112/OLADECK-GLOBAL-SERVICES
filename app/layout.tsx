@@ -20,6 +20,11 @@ export const metadata: Metadata = {
   },
   description:
     "Premium Nigerian vehicle clearing and forwarding for imported cars, SUVs, luxury vehicles, auction cars, and corporate fleets.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png"
+  },
   keywords: [
     "Nigeria vehicle clearing",
     "customs clearance",
