@@ -1,8 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { ChevronDown, ChevronRight, Mail, Menu, MessageCircle, Phone, User, X } from "lucide-react";
+import {
+  ChevronDown,
+  ChevronRight,
+  FileText,
+  Lock,
+  LogOut,
+  Mail,
+  Menu,
+  MessageCircle,
+  Package,
+  Phone,
+  Shield,
+  User,
+  UserCheck,
+  X
+} from "lucide-react";
+import { logoutAction } from "@/app/auth/actions";
 import { whatsappUrl } from "@/lib/utils";
 
 const services = [
@@ -27,6 +43,7 @@ export function SiteHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [mobileIndustriesOpen, setMobileIndustriesOpen] = useState(false);
 
@@ -45,13 +62,75 @@ export function SiteHeader() {
             <a href="mailto:biona4real@gmail.com" className="hidden xs:flex items-center gap-1 text-white/80 hover:text-white transition">
               <Mail className="h-3 w-3" /> biona4real@gmail.com
             </a>
-            <div className="flex items-center gap-2.5 border-l border-white/20 pl-3">
-              <Link href="/login" className="flex items-center gap-1 text-gold font-bold hover:underline">
-                <User className="h-3 w-3" /> Sign In
-              </Link>
-              <Link href="/signup" className="text-white/90 font-semibold hover:underline">
-                Sign Up
-              </Link>
+            <div className="flex items-center gap-2.5 border-l border-white/20 pl-3 relative">
+              {/* Profile Avatar Dropdown Trigger */}
+              <button
+                onClick={() => setProfileOpen((o) => !o)}
+                className="flex items-center gap-1.5 text-gold font-bold hover:text-yellow-300 transition py-0.5"
+              >
+                <div className="h-5 w-5 rounded-full bg-gold/20 border border-gold/40 flex items-center justify-center text-gold">
+                  <User className="h-3 w-3" />
+                </div>
+                <span>Account</span>
+                <ChevronDown className={`h-3 w-3 transition-transform ${profileOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Profile Dropdown Menu */}
+              {profileOpen && (
+                <div
+                  onMouseLeave={() => setProfileOpen(false)}
+                  className="absolute right-0 top-full mt-2 w-56 bg-white text-navy rounded-2xl shadow-2xl border border-gray-100 py-2 z-50 animate-in fade-in zoom-in-95 duration-150"
+                >
+                  <div className="px-4 py-2 border-b border-gray-100">
+                    <p className="text-xs font-extrabold text-navy uppercase tracking-wider">Customer Portal</p>
+                    <p className="text-[10px] text-muted-foreground">Manage quotes &amp; vehicle tracking</p>
+                  </div>
+
+                  <div className="py-1">
+                    <Link
+                      href="/portal"
+                      onClick={() => setProfileOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted hover:text-navy transition"
+                    >
+                      <UserCheck className="h-3.5 w-3.5 text-gold" /> Customer Dashboard
+                    </Link>
+                    <Link
+                      href="/track"
+                      onClick={() => setProfileOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted hover:text-navy transition"
+                    >
+                      <Package className="h-3.5 w-3.5 text-navy" /> Live Vehicle Tracking
+                    </Link>
+                    <Link
+                      href="/quote"
+                      onClick={() => setProfileOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted hover:text-navy transition"
+                    >
+                      <FileText className="h-3.5 w-3.5 text-navy" /> Request New Quote
+                    </Link>
+                    <Link
+                      href="/admin"
+                      onClick={() => setProfileOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-amber-600 hover:bg-amber-50 transition border-t border-gray-100 mt-1 pt-2"
+                    >
+                      <Shield className="h-3.5 w-3.5 text-amber-500" /> Admin Command Center
+                    </Link>
+                  </div>
+
+                  <div className="border-t border-gray-100 pt-1">
+                    <button
+                      onClick={async () => {
+                        setProfileOpen(false);
+                        await logoutAction();
+                        window.location.href = "/login";
+                      }}
+                      className="w-full text-left flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-red-600 hover:bg-red-50 transition"
+                    >
+                      <LogOut className="h-3.5 w-3.5" /> Sign Out
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -124,16 +203,10 @@ export function SiteHeader() {
         {/* Desktop CTA row */}
         <div className="hidden lg:flex items-center gap-2 shrink-0">
           <Link
-            href="/login"
-            className="rounded-full border border-navy/20 px-3.5 py-1.5 text-xs font-semibold text-navy hover:bg-muted transition"
+            href="/portal"
+            className="flex items-center gap-1.5 rounded-full border border-navy/20 bg-navy/5 px-3.5 py-1.5 text-xs font-bold text-navy hover:bg-navy/10 transition"
           >
-            Sign In
-          </Link>
-          <Link
-            href="/signup"
-            className="rounded-full bg-gold/15 border border-gold/30 px-3.5 py-1.5 text-xs font-bold text-navy hover:bg-gold/25 transition"
-          >
-            Sign Up
+            <User className="h-3.5 w-3.5 text-gold" /> Portal
           </Link>
           <a
             href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle.")}
@@ -163,6 +236,17 @@ export function SiteHeader() {
       {mobileOpen && (
         <div className="fixed inset-x-0 top-[90px] bottom-0 z-40 bg-white border-t border-border overflow-y-auto lg:hidden shadow-2xl flex flex-col justify-between">
           <div className="container-pad py-5 space-y-3">
+            <Link
+              href="/portal"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-between py-3 px-4 rounded-xl bg-gold/15 border border-gold/30 text-sm font-bold text-navy"
+            >
+              <span className="flex items-center gap-2">
+                <UserCheck className="h-4 w-4 text-gold" /> Customer Account Dashboard
+              </span>
+              <ChevronRight className="h-4 w-4 text-navy" />
+            </Link>
+
             <Link
               href="/#about"
               onClick={() => setMobileOpen(false)}
