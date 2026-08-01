@@ -66,6 +66,8 @@ export const viewport: Viewport = {
   themeColor: "#0B1F3A"
 };
 
+import { TermsConsentModal } from "@/components/layout/terms-consent-modal";
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   const organizationJsonLd = {
     "@context": "https://schema.org",
@@ -89,6 +91,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
         />
+        <TermsConsentModal />
         <SiteHeader />
         <main>{children}</main>
         <SiteFooter />

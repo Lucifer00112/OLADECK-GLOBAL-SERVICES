@@ -159,12 +159,38 @@ export function QuoteForm() {
           </div>
 
           <div className={step === 3 ? "grid gap-4" : "hidden"}>
-            <Field label="Additional Notes"><Textarea {...register("notes")} name="notes" /></Field>
-            <label className="grid gap-2 rounded-lg border border-dashed p-6 text-center text-sm font-medium">
+            <Field label="Additional Notes"><Textarea {...register("notes")} name="notes" placeholder="Any special instructions or information about your vehicle shipment..." /></Field>
+            <label className="grid gap-2 rounded-lg border border-dashed p-6 text-center text-sm font-medium hover:bg-muted/30 transition cursor-pointer">
               <FileUp className="mx-auto h-6 w-6 text-gold" />
-              Upload documents, images, or invoice
-              <Input name="documents" type="file" multiple className="mx-auto max-w-md" />
+              Upload vehicle documents, B/L, or invoice
+              <Input name="documents" type="file" multiple className="mx-auto max-w-md cursor-pointer" />
             </label>
+
+            {/* Mandatory Legal & Data Consent Checkboxes */}
+            <div className="rounded-xl bg-muted/40 p-4 border border-border space-y-3 text-xs text-navy mt-2">
+              <p className="font-bold text-xs uppercase tracking-wider text-gold">Service Terms & Legal Consent</p>
+              
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input type="checkbox" required defaultChecked className="mt-0.5 h-4 w-4 rounded border-gray-300 text-navy focus:ring-navy shrink-0" />
+                <span className="leading-snug">
+                  I agree to OLADECK Global Services&apos; <a href="/terms" target="_blank" className="font-semibold underline text-gold">Terms of Service</a> and confirm all submitted vehicle details and VIN information are accurate.
+                </span>
+              </label>
+
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input type="checkbox" required defaultChecked className="mt-0.5 h-4 w-4 rounded border-gray-300 text-navy focus:ring-navy shrink-0" />
+                <span className="leading-snug">
+                  I consent to the processing of my documentation in accordance with the <a href="/privacy" target="_blank" className="font-semibold underline text-navy">Privacy Policy</a> for customs declaration and clearing purposes.
+                </span>
+              </label>
+
+              <label className="flex items-start gap-2.5 cursor-pointer">
+                <input type="checkbox" required defaultChecked className="mt-0.5 h-4 w-4 rounded border-gray-300 text-navy focus:ring-navy shrink-0" />
+                <span className="leading-snug font-medium text-foreground">
+                  I permit OLADECK Global Services to contact me via <strong>WhatsApp, Email, and Phone</strong> for real-time duty updates and clearing invoices.
+                </span>
+              </label>
+            </div>
           </div>
 
           {state.message && !state.ok ? (

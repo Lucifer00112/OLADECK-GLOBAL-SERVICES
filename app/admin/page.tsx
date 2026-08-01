@@ -4,8 +4,8 @@ import { isAdminAuthenticated } from "@/lib/admin-auth";
 import { AdminDashboard } from "@/components/admin/admin-dashboard";
 
 export const metadata: Metadata = {
-  title: "Admin Operations Console",
-  description: "Secure operations dashboard for quotes, customers, pricing, and clearing statuses."
+  title: "Executive Operations Console — OLADECK Global Services",
+  description: "Secure high-tech operations dashboard for vehicle quotes, customs statuses, and pricing."
 };
 
 export default async function AdminPage() {
@@ -15,19 +15,8 @@ export default async function AdminPage() {
   }
 
   return (
-    <section className="bg-muted/40 py-10 md:py-16">
-      <div className="container-pad">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Secure Console</p>
-            <h1 className="mt-2 text-2xl font-bold tracking-tight md:text-4xl">Operations Command Center</h1>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Live quote tracking, status workflow, and package pricing connected to Supabase.
-            </p>
-          </div>
-        </div>
-        <AdminDashboard />
-      </div>
-    </section>
+    <div className="min-h-screen bg-[#070C18] text-slate-100 font-sans selection:bg-amber-500/30 selection:text-amber-200">
+      <AdminDashboard />
+    </div>
   );
 }

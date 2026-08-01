@@ -100,38 +100,38 @@ export default function HomePage() {
     <>
       {/* ── HERO ─────────────────────────────────────────────────── */}
       <section className="hero-bg text-white overflow-hidden">
-        <div className="container-pad grid min-h-[520px] items-center gap-10 py-16 md:py-24 lg:grid-cols-2">
+        <div className="container-pad grid min-h-[400px] sm:min-h-[520px] items-center gap-10 py-12 sm:py-16 md:py-24 lg:grid-cols-2">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-yellow-300 mb-4">
-              Nigeria's Trusted Vehicle Clearing Agency
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-yellow-300 mb-3">
+              Nigeria&apos;s Trusted Vehicle Clearing Agency
             </p>
-            <h1 className="text-4xl font-extrabold tracking-tight leading-tight sm:text-5xl lg:text-6xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
               We make vehicle{" "}
               <span className="text-gold">imports &amp; clearance</span>{" "}
               simple!
             </h1>
-            <p className="mt-5 text-lg text-white/80 max-w-xl leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
               OLADECK Global Services is the vehicle clearing agent in Nigeria you can always count on — fast, transparent, and hassle-free from port to delivery.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
               <a
                 href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle. Please advise on pricing.")}
-                className="flex items-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-semibold text-white hover:bg-[#1db854] transition shadow-md"
+                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-bold text-sm text-white hover:bg-[#1db854] transition shadow-md w-full sm:w-auto"
               >
                 <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
               </a>
               <Link
                 href="/quote"
-                className="flex items-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-6 py-3 font-semibold text-white hover:bg-white/20 transition"
+                className="flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-6 py-3 font-bold text-sm text-white hover:bg-white/20 transition w-full sm:w-auto"
               >
                 Get a Quote Online
               </Link>
             </div>
-            <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
               {stats.map((s) => (
-                <div key={s.label} className="text-center">
-                  <p className="text-2xl font-extrabold text-gold">{s.value}</p>
-                  <p className="mt-1 text-xs text-white/70">{s.label}</p>
+                <div key={s.label} className="text-center rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur">
+                  <p className="text-xl sm:text-2xl font-extrabold text-gold">{s.value}</p>
+                  <p className="mt-0.5 text-[11px] text-white/80">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -159,11 +159,11 @@ export default function HomePage() {
       </section>
 
       {/* ── MARQUEE TRUST BAR ────────────────────────────────────── */}
-      <div className="border-y border-border bg-muted/40 py-4">
-        <div className="container-pad flex flex-wrap items-center justify-center gap-6 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+      <div className="border-y border-border bg-muted/40 py-3.5 overflow-hidden">
+        <div className="container-pad flex items-center justify-center flex-wrap gap-2.5 sm:gap-6 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-navy">
           {["Apapa Port", "Tin Can Island", "PTML Terminal", "Onne Port", "All Nigerian States", "Licensed & Bonded", "Customs Compliant"].map((item) => (
-            <span key={item} className="flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold" />
+            <span key={item} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-border shadow-2xs">
+              <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
               {item}
             </span>
           ))}
@@ -201,7 +201,7 @@ export default function HomePage() {
           <div className="order-1 lg:order-2">
             <span className="accent-line" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">About Us</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               The Only Clearing Agent in Nigeria You Will Ever Need
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -218,11 +218,11 @@ export default function HomePage() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex gap-3">
-              <Link href="/quote" className="rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition">
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <Link href="/quote" className="rounded-full bg-navy px-5 py-3 sm:py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition text-center">
                 Start a Clearing Request
               </Link>
-              <Link href="/contact" className="rounded-full border border-border px-5 py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition">
+              <Link href="/contact" className="rounded-full border border-border px-5 py-3 sm:py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition text-center">
                 Contact Us
               </Link>
             </div>
@@ -236,7 +236,7 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="accent-line mx-auto" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">What We Do</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               Specialist Clearing Services for Imported Vehicles
             </h2>
             <p className="mt-3 text-muted-foreground">
@@ -261,7 +261,7 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="accent-line mx-auto" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Simple Process</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               How Vehicle Clearing Works with OLADECK
             </h2>
           </div>
@@ -283,7 +283,7 @@ export default function HomePage() {
           <div>
             <span className="accent-line" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Customs Clearance</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               Licensed Customs Agents with Deep Nigeria Expertise
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -324,7 +324,7 @@ export default function HomePage() {
           <div>
             <span className="accent-line" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Clearing & Forwarding</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               From Any Port in the World to Your Doorstep in Nigeria
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -335,7 +335,7 @@ export default function HomePage() {
             </p>
             <a
               href={whatsappUrl("Hello OLADECK Global Services, I need freight forwarding and clearing services.")}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition"
+              className="mt-6 flex sm:inline-flex items-center justify-center gap-2 rounded-full bg-navy px-5 py-3 sm:py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition"
             >
               <MessageCircle className="h-4 w-4" /> Get a Freight Quote on WhatsApp
             </a>
@@ -349,7 +349,7 @@ export default function HomePage() {
           <div className="max-w-2xl mx-auto text-center mb-12">
             <span className="accent-line mx-auto" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Industries We Serve</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               Clearing Solutions Across All Import Sectors
             </h2>
           </div>
@@ -374,7 +374,7 @@ export default function HomePage() {
         <div className="container-pad">
           <div className="max-w-2xl mx-auto text-center mb-12">
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-3">Why Choose OLADECK?</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-white md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white md:text-4xl">
               The Clearing Agent of Choice for Hundreds of Importers
             </h2>
           </div>
@@ -393,23 +393,23 @@ export default function HomePage() {
             })}
           </div>
           {/* Big CTA */}
-          <div className="mt-14 rounded-2xl bg-gold/20 border border-gold/30 p-8 md:p-12 text-center">
-            <h3 className="text-2xl font-extrabold text-white md:text-3xl">
+          <div className="mt-14 rounded-2xl bg-gold/20 border border-gold/30 p-5 sm:p-8 md:p-12 text-center">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-white md:text-3xl">
               Have a Vehicle to Clear? Let's Talk Pricing.
             </h3>
-            <p className="mt-3 text-white/75 max-w-xl mx-auto">
+            <p className="mt-3 text-sm sm:text-base text-white/75 max-w-xl mx-auto">
               Send us your car details on WhatsApp — Make, Model, Year, VIN, and arrival port — and we will send you a full clearing price breakdown within minutes.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href={whatsappUrl("Hello OLADECK Global Services, I want to clear my car. Here are the details:\n\n- Make & Model:\n- Year:\n- VIN:\n- Arrival Port:")}
-                className="flex items-center gap-2 rounded-full bg-[#25D366] px-8 py-3 text-base font-bold text-white hover:bg-[#1db854] transition shadow-lg"
+                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 sm:px-8 py-3 text-sm sm:text-base font-bold text-white hover:bg-[#1db854] transition shadow-lg w-full sm:w-auto"
               >
                 <MessageCircle className="h-5 w-5" /> Send Vehicle Details on WhatsApp
               </a>
               <Link
                 href="/quote"
-                className="flex items-center gap-2 rounded-full border-2 border-white/30 px-8 py-3 text-base font-semibold text-white hover:bg-white/10 transition"
+                className="flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white hover:bg-white/10 transition w-full sm:w-auto"
               >
                 Submit Request Online
               </Link>
@@ -435,7 +435,7 @@ export default function HomePage() {
           <div className="max-w-2xl mb-10">
             <span className="accent-line" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Live Tracking</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               Track Your Vehicle Clearing Progress
             </h2>
             <p className="mt-3 text-muted-foreground">
@@ -452,7 +452,7 @@ export default function HomePage() {
           <div>
             <span className="accent-line" />
             <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">FAQs</p>
-            <h2 className="text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
+            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
               Frequently Asked Questions
             </h2>
             <p className="mt-4 text-muted-foreground leading-relaxed">
@@ -472,11 +472,11 @@ export default function HomePage() {
       {/* ── BLOG & RESOURCES ─────────────────────────────────────── */}
       <section className="section-muted py-16 md:py-24">
         <div className="container-pad">
-          <div className="flex items-end justify-between gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div>
               <span className="accent-line" />
               <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Import Guides</p>
-              <h2 className="text-3xl font-extrabold tracking-tight text-navy">Latest Articles & Port Updates</h2>
+              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy">Latest Articles & Port Updates</h2>
             </div>
             <Link href="/blog" className="hidden sm:inline-flex rounded-full border border-border px-4 py-2 text-sm font-semibold hover:bg-white transition shrink-0">
               View All Articles →

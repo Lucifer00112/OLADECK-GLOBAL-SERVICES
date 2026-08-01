@@ -70,9 +70,9 @@ export default function CustomerLoginPage() {
                 <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
                   <Lock className="h-3.5 w-3.5 text-gold" /> Password
                 </label>
-                <a href="/contact" className="text-[11px] font-medium text-navy hover:underline">
+                <Link href="/forgot-password" className="text-[11px] font-medium text-gold hover:underline font-bold">
                   Forgot password?
-                </a>
+                </Link>
               </div>
               <Input
                 type="password"

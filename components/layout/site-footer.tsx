@@ -27,10 +27,12 @@ const footerLinks = {
     ["Corporate Fleets", "/#services"]
   ],
   Legal: [
-    ["Privacy Policy", "/privacy"],
     ["Terms of Service", "/terms"],
-    ["Contact Us", "/contact"],
-    ["Blog & Resources", "/blog"]
+    ["Privacy Policy", "/privacy"],
+    ["Cookie Policy", "/cookies"],
+    ["Duty Disclaimer", "/disclaimer"],
+    ["Refund Policy", "/refund-policy"],
+    ["Contact Us", "/contact"]
   ]
 };
 
@@ -44,14 +46,14 @@ export function SiteFooter() {
             <h3 className="text-xl font-extrabold text-white">Ready to Clear Your Vehicle?</h3>
             <p className="mt-1 text-sm text-white/65">Send us the vehicle details on WhatsApp and get a price quote in minutes.</p>
           </div>
-          <div className="flex gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
             <a
               href={whatsappUrl("Hello OLADECK Global Services, I want to clear my vehicle and need a price quote.")}
-              className="flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1db854] transition"
+              className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 py-2.5 text-sm font-bold text-white hover:bg-[#1db854] transition"
             >
               <MessageCircle className="h-4 w-4" /> WhatsApp Us
             </a>
-            <Link href="/quote" className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition">
+            <Link href="/quote" className="rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white hover:bg-white/10 transition text-center">
               Online Quote
             </Link>
           </div>
@@ -60,9 +62,9 @@ export function SiteFooter() {
 
       {/* Main footer grid */}
       <div className="container-pad py-14">
-        <div className="grid gap-8 md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
+        <div className="grid gap-8 grid-cols-2 sm:grid-cols-3 md:grid-cols-[1.5fr_1fr_1fr_1fr_1fr]">
           {/* Brand col */}
-          <div className="space-y-5">
+          <div className="space-y-5 col-span-2 sm:col-span-3 md:col-span-1">
             <div className="flex items-center gap-3">
               <img
                 src="/logo.png"
