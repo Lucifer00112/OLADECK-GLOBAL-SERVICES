@@ -5,8 +5,7 @@ import {
   clearAdminSession,
   isAdminAuthenticated,
   isAdminPasswordConfigured,
-  verifyOtpAndCreateSession,
-  verifyPasscodeAndRequestOtp
+  verifyAdminCredentials
 } from "@/lib/admin-auth";
 import { defaultPriceList } from "@/lib/data";
 import { createSupabaseAdminClient } from "@/lib/supabase/server";
@@ -42,12 +41,8 @@ export async function getAdminSessionStatus() {
   };
 }
 
-export async function verifyPasscodeAction(password: string) {
-  return verifyPasscodeAndRequestOtp(password);
-}
-
-export async function verifyOtpAction(otpCode: string) {
-  return verifyOtpAndCreateSession(otpCode);
+export async function verifyAdminCredentialsAction(username: string, password: string) {
+  return verifyAdminCredentials(username, password);
 }
 
 export async function logoutAdminDashboard() {

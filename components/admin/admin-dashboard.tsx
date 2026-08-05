@@ -240,25 +240,6 @@ export function AdminDashboard() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Role Switcher */}
-            <div className="hidden sm:flex items-center gap-1 bg-slate-900/80 p-1 rounded-lg border border-slate-800 text-xs">
-              <span className="px-2 text-slate-400 font-medium">Role:</span>
-              {(["admin", "manager", "staff"] as Role[]).map((r) => (
-                <button
-                  key={r}
-                  onClick={() => {
-                    setCurrentRole(r);
-                    logAction("ROLE_CHANGE", `Switched active view role to ${r.toUpperCase()}`);
-                  }}
-                  className={`px-2.5 py-1 rounded-md font-bold capitalize transition ${
-                    currentRole === r ? "bg-amber-500 text-slate-950 shadow-sm" : "text-slate-300 hover:text-white"
-                  }`}
-                >
-                  {r}
-                </button>
-              ))}
-            </div>
-
             <Button
               variant="outline"
               size="sm"
@@ -266,7 +247,7 @@ export function AdminDashboard() {
               disabled={isPending}
               className="border-slate-700 bg-slate-900/50 text-slate-200 hover:bg-slate-800 hover:text-white text-xs h-9"
             >
-              <RefreshCw className="mr-1.5 h-3.5 w-3.5 text-amber-400" /> Sync
+              <RefreshCw className="mr-1.5 h-3.5 w-3.5 text-amber-400" /> Sync Data
             </Button>
 
             <Button
@@ -284,28 +265,26 @@ export function AdminDashboard() {
       {/* Main Body */}
       <main className="container-pad py-8 flex-1 space-y-6">
         {/* Status Notification Banner */}
-        <div className="rounded-xl border border-amber-500/30 bg-gradient-to-r from-amber-500/10 via-slate-900 to-slate-900 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
+        <div className="rounded-xl border border-slate-800 bg-slate-900/90 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-lg">
           <div className="flex items-center gap-3">
-            <div className="h-9 w-9 rounded-lg bg-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+            <div className="h-9 w-9 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
               <Database className="h-5 w-5" />
             </div>
             <div>
-              <p className="text-xs font-bold text-amber-300 flex items-center gap-2">
-                {dashboard.supabaseConfigured ? "🟢 Live Supabase Database Connected" : "🟡 Offline Demo Mode Active"}
+              <p className="text-xs font-bold text-slate-200 flex items-center gap-2">
+                {dashboard.supabaseConfigured ? "Live Database Connected" : "Local Engine Active"}
               </p>
               <p className="text-xs text-slate-400 mt-0.5">
                 {message ||
                   (dashboard.supabaseConfigured
-                    ? "All quote updates, customer records, and prices sync live to your database."
-                    : "Using local memory storage. Add Supabase keys to .env.local to enable cloud sync.")}
+                    ? "All quote updates, customer records, and pricing models are synchronized live."
+                    : "Operating in local database mode.")}
               </p>
             </div>
           </div>
-          {currentRole !== "admin" && (
-            <span className="text-[11px] font-bold px-3 py-1 rounded-full bg-slate-800 text-amber-400 border border-slate-700">
-              View Mode: {currentRole.toUpperCase()}
-            </span>
-          )}
+          <span className="text-[11px] font-mono px-3 py-1 rounded-full bg-slate-950 text-slate-400 border border-slate-800">
+            System Administrator Session
+          </span>
         </div>
 
         {/* Navigation Tabs */}

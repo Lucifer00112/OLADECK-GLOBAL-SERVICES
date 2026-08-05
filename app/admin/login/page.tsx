@@ -2,134 +2,119 @@
 
 import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { KeyRound, ShieldCheck, ShipWheel } from "lucide-react";
+import { Lock, LogIn, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { verifyOtpAction, verifyPasscodeAction } from "@/app/admin/actions";
+import { verifyAdminCredentialsAction } from "@/app/admin/actions";
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [step, setStep] = useState<"passcode" | "otp">("passcode");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [otpCode, setOtpCode] = useState("");
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [isPending, startTransition] = useTransition();
 
-  function handlePasscodeSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setError("");
-    setMessage("");
 
     startTransition(async () => {
-      const res = await verifyPasscodeAction(password);
-      if (res.ok) {
-        setStep("otp");
-        setMessage(res.message || "Passcode accepted. Enter verification code.");
-      } else {
-        setError(res.message || "Invalid admin passcode.");
-      }
-    });
-  }
-
-  function handleOtpSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    setError("");
-    setMessage("");
-
-    startTransition(async () => {
-      const res = await verifyOtpAction(otpCode);
+      const res = await verifyAdminCredentialsAction(username, password);
       if (res.ok) {
         router.push("/admin");
         router.refresh();
       } else {
-        setError(res.message || "Invalid verification code.");
+        setError(res.message || "Invalid credentials.");
       }
     });
   }
 
   return (
-    <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center bg-muted/40 py-16 px-4">
-      <Card className="w-full max-w-md shadow-glow">
-        <CardHeader className="text-center">
-          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-navy/5 p-1 shadow-sm">
-            <img src="/logo.png" alt="OLADECK Logo" className="h-full w-full object-contain rounded-full" />
+    <div className="min-h-screen flex items-center justify-center bg-[#070C18] px-4">
+      <div className="w-full max-w-sm">
+        {/* Logo & Branding */}
+        <div className="flex flex-col items-center mb-8 gap-3">
+          <div className="h-16 w-16 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center shadow-lg shadow-amber-500/10">
+            <img src="/logo.png" alt="OLADECK Logo" className="h-12 w-12 object-contain rounded-xl" />
           </div>
-          <CardTitle className="text-2xl font-bold">Admin Verification</CardTitle>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {step === "passcode"
-              ? "Step 1 of 2: Enter OLADECK Global Services Admin Passcode"
-              : "Step 2 of 2: Enter 6-digit Verification Code"}
-          </p>
-        </CardHeader>
+          <div className="text-center">
+            <p className="text-xs font-bold tracking-[0.25em] uppercase text-amber-500 mb-1">OLADECK Global Services</p>
+            <h1 className="text-2xl font-extrabold text-white tracking-tight">Operations Console</h1>
+            <p className="text-xs text-slate-500 mt-1">Restricted access. Authorized personnel only.</p>
+          </div>
+        </div>
 
-        <CardContent>
-          {error ? (
-            <div className="mb-4 rounded-lg bg-red-500/10 p-3 text-sm font-medium text-red-600 dark:text-red-400">
-              {error}
+        {/* Login Card */}
+        <div className="bg-slate-900/80 border border-slate-800 rounded-2xl p-7 shadow-2xl backdrop-blur-sm">
+          <form onSubmit={handleSubmit} className="space-y-5">
+            {error && (
+              <div className="flex items-center gap-2 rounded-xl bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
+                <Lock className="h-4 w-4 shrink-0" />
+                {error}
+              </div>
+            )}
+
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                Username
+              </label>
+              <div className="relative">
+                <User className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
+                <Input
+                  type="text"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  placeholder="Enter your username"
+                  required
+                  autoFocus
+                  autoComplete="username"
+                  className="pl-10 bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-amber-500/60 focus-visible:ring-amber-500/20 rounded-xl h-11"
+                />
+              </div>
             </div>
-          ) : null}
 
-          {message ? (
-            <div className="mb-4 rounded-lg bg-emerald-500/10 p-3 text-sm font-medium text-emerald-600 dark:text-emerald-400">
-              {message}
-            </div>
-          ) : null}
-
-          {step === "passcode" ? (
-            <form onSubmit={handlePasscodeSubmit} className="grid gap-4">
-              <label className="grid gap-2 text-sm font-medium">
-                Passcode
+            <div className="space-y-1.5">
+              <label className="block text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                Password
+              </label>
+              <div className="relative">
+                <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-500 pointer-events-none" />
                 <Input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Enter passcode (Default: admin123)"
+                  placeholder="Enter your password"
                   required
-                  autoFocus
+                  autoComplete="current-password"
+                  className="pl-10 bg-slate-950 border-slate-800 text-white placeholder:text-slate-600 focus:border-amber-500/60 focus-visible:ring-amber-500/20 rounded-xl h-11"
                 />
-              </label>
-              <Button type="submit" disabled={isPending} className="w-full">
-                <KeyRound className="mr-2 h-4 w-4" />
-                {isPending ? "Verifying Passcode..." : "Verify Passcode"}
-              </Button>
-            </form>
-          ) : (
-            <form onSubmit={handleOtpSubmit} className="grid gap-4">
-              <label className="grid gap-2 text-sm font-medium">
-                Verification Code (OTP)
-                <Input
-                  type="text"
-                  maxLength={6}
-                  value={otpCode}
-                  onChange={(e) => setOtpCode(e.target.value)}
-                  placeholder="Enter 6-digit code (Demo: 654321)"
-                  className="text-center text-lg tracking-widest font-mono"
-                  required
-                  autoFocus
-                />
-              </label>
-              <Button type="submit" disabled={isPending} className="w-full">
-                <ShieldCheck className="mr-2 h-4 w-4" />
-                {isPending ? "Validating Code..." : "Authorize Admin Session"}
-              </Button>
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => {
-                  setStep("passcode");
-                  setError("");
-                  setMessage("");
-                }}
-              >
-                Back to Passcode
-              </Button>
-            </form>
-          )}
-        </CardContent>
-      </Card>
-    </section>
+              </div>
+            </div>
+
+            <Button
+              type="submit"
+              disabled={isPending || !username || !password}
+              className="w-full h-11 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 disabled:opacity-50"
+            >
+              {isPending ? (
+                <span className="flex items-center gap-2">
+                  <span className="h-4 w-4 rounded-full border-2 border-slate-950/30 border-t-slate-950 animate-spin" />
+                  Verifying...
+                </span>
+              ) : (
+                <span className="flex items-center gap-2">
+                  <LogIn className="h-4 w-4" />
+                  Sign In
+                </span>
+              )}
+            </Button>
+          </form>
+        </div>
+
+        <p className="text-center text-xs text-slate-600 mt-6">
+          © 2026 OLADECK Global Services · Secure Admin Portal
+        </p>
+      </div>
+    </div>
   );
 }

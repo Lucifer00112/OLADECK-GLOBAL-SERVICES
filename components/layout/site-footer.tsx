@@ -9,8 +9,7 @@ const footerLinks = {
     ["Get a Quote", "/quote"],
     ["Track Shipment", "/track"],
     ["Customer Sign In", "/login"],
-    ["Create Account", "/signup"],
-    ["Admin Portal", "/admin"]
+    ["Create Account", "/signup"]
   ],
   Services: [
     ["Customs Clearance", "/#services"],

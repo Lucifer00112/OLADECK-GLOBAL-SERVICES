@@ -13,7 +13,6 @@ import {
   MessageCircle,
   Package,
   Phone,
-  Shield,
   User,
   UserCheck,
   X
@@ -107,13 +106,6 @@ export function SiteHeader() {
                       className="flex items-center gap-2.5 px-4 py-2 text-xs font-semibold text-foreground hover:bg-muted hover:text-navy transition"
                     >
                       <FileText className="h-3.5 w-3.5 text-navy" /> Request New Quote
-                    </Link>
-                    <Link
-                      href="/admin"
-                      onClick={() => setProfileOpen(false)}
-                      className="flex items-center gap-2.5 px-4 py-2 text-xs font-bold text-amber-600 hover:bg-amber-50 transition border-t border-gray-100 mt-1 pt-2"
-                    >
-                      <Shield className="h-3.5 w-3.5 text-amber-500" /> Admin Command Center
                     </Link>
                   </div>
 
