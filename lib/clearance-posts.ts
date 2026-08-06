@@ -164,7 +164,16 @@ export function getClearancePosts(): ClearancePost[] {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(initialClearancePosts));
       return initialClearancePosts;
     }
-    return JSON.parse(stored);
+    const parsed = JSON.parse(stored);
+    if (!Array.isArray(parsed) || !parsed.length) {
+      return initialClearancePosts;
+    }
+    return parsed.map((p: any) => ({
+      ...p,
+      likesCount: p.likesCount && p.likesCount > 1000 ? p.likesCount : 104280,
+      commentsCount: p.commentsCount && p.commentsCount > 1000 ? p.commentsCount : 31450,
+      comments: p.comments && p.comments.length ? p.comments : generateInitialComments(6)
+    }));
   } catch {
     return initialClearancePosts;
   }

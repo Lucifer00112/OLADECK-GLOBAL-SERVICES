@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import {
   addCommentToPost,
   getClearancePosts,
+  initialClearancePosts,
   toggleLikeClearancePost
 } from "@/lib/clearance-posts";
 import type { ClearancePost } from "@/lib/types";
@@ -34,8 +35,12 @@ function formatCount(num: number): string {
 }
 
 export function ClearanceFeed() {
-  const [posts, setPosts] = useState<ClearancePost[]>(() => getClearancePosts());
+  const [posts, setPosts] = useState<ClearancePost[]>(initialClearancePosts);
   const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    setPosts(getClearancePosts());
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [expandedDocs, setExpandedDocs] = useState<Record<string, boolean>>({});
   const [expandedComments, setExpandedComments] = useState<Record<string, boolean>>({});
