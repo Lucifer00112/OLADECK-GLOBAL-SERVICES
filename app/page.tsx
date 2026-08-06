@@ -1,542 +1,227 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { CheckCircle2, MessageCircle, Ship, ShieldCheck, Star } from "lucide-react";
-import { Accordion } from "@/components/ui/accordion";
-import { Gallery } from "@/components/marketing/gallery";
-import { DocumentChecklist } from "@/components/tools/document-checklist";
-import { DutyEstimator } from "@/components/tools/duty-estimator";
-import { TrackingDashboard } from "@/components/tracking/tracking-dashboard";
+import { ClearanceFeed } from "@/components/portfolio/clearance-feed";
 import {
-  blogPosts,
-  faqs,
-  galleryItems,
-  portUpdates,
-  resources
-} from "@/lib/data";
+  CheckCircle2,
+  FileText,
+  Flame,
+  MessageCircle,
+  PackageCheck,
+  PlusCircle,
+  ShieldCheck,
+  Sparkles,
+  TrendingUp
+} from "lucide-react";
 import { whatsappUrl } from "@/lib/utils";
 
-const services = [
+export const metadata: Metadata = {
+  title: "OLADECK Social — Live Cleared Vehicles & Port Operations Feed",
+  description: "Browse verified cleared vehicles, port release documentations, and real-time customs updates from Apapa, Tin Can, and PTML."
+};
+
+const storyHighlights = [
   {
-    icon: "🛃",
-    title: "Customs Clearance",
-    desc: "We handle all paperwork, declarations, and compliance procedures with Nigeria Customs Service on your behalf — ensuring your vehicle clears without delays."
+    name: "Apapa Dock",
+    avatar: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=200&q=80",
+    tag: "LIVE"
   },
   {
-    icon: "📋",
-    title: "Duty Processing",
-    desc: "Our team coordinates duty assessments, calculates tariffs, and processes all duty memo payments through the proper government channels with full transparency."
+    name: "Tin Can RORO",
+    avatar: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=200&q=80",
+    tag: "RELEASED"
   },
   {
-    icon: "🚢",
-    title: "Clearing & Forwarding",
-    desc: "From port of origin to your doorstep, we manage FCL/LCL shipments, shipping line coordination, and container examination at all major Nigerian ports."
+    name: "PTML Clearance",
+    avatar: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=200&q=80",
+    tag: "FAST"
   },
   {
-    icon: "🚛",
-    title: "Fleet Clearance",
-    desc: "Whether you're importing 5 or 50 vehicles, our bulk clearance service offers staged documentation, priority handling, and group discounts for corporate importers."
-  },
-  {
-    icon: "📦",
-    title: "Cargo Handling",
-    desc: "Professional personnel receive and handle your vehicle at the terminal, ensuring it's safely stored, inspected, and prepared for release without damage."
-  },
-  {
-    icon: "⚡",
-    title: "Fast Track Assistance",
-    desc: "Urgent clearance needed? Our fast track desk prioritises your case with dedicated officers, accelerating release for qualified urgent import cases."
+    name: "Duty Paid",
+    avatar: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=200&q=80",
+    tag: "VERIFIED"
   }
 ];
 
-const industries = [
-  { label: "Automobile Imports", detail: "Cars, SUVs, Pickups, Buses, Vans" },
-  { label: "Oil & Gas Equipment", detail: "AGO, PMS, Tankers, Machinery" },
-  { label: "Agricultural Machinery", detail: "Tractors, Harvesters, Equipment" },
-  { label: "Industrial Equipment", detail: "Factory, Construction, Mining" },
-  { label: "Government & Military", detail: "Licensed sensitive cargo clearance" },
-  { label: "Corporate Fleets", detail: "Bulk vehicle clearance programs" }
+const trendingTopics = [
+  { tag: "#ApapaPort", posts: "4.2k clearances" },
+  { tag: "#TinCanIsland", posts: "3.8k clearances" },
+  { tag: "#VINValuation", posts: "Updated 2026" },
+  { tag: "#PTMLRORO", posts: "2.1k clearances" },
+  { tag: "#ZeroDemurrage", posts: "Guaranteed" }
 ];
 
-const whyUs = [
-  {
-    icon: Star,
-    title: "15+ Years of Experience",
-    desc: "Over a decade and a half clearing thousands of vehicles through Nigeria's busiest ports including Apapa, Tin Can, PTML, and Onne."
-  },
-  {
-    icon: ShieldCheck,
-    title: "100% Customs Compliance",
-    desc: "We file all entries electronically and ensure NAFDAC, SON, NFPC, and NXP requirements are fully met to prevent port delays."
-  },
-  {
-    icon: CheckCircle2,
-    title: "All Ports, One Contact",
-    desc: "We operate across all major Nigerian arrival ports. One point of contact, one trusted team handling your entire clearing journey."
-  },
-  {
-    icon: MessageCircle,
-    title: "WhatsApp-First Communication",
-    desc: "Instant price discussions, status updates, and document sharing — all through WhatsApp for maximum speed and convenience."
-  }
-];
-
-const stats = [
-  { value: "3,000+", label: "Vehicles Cleared" },
-  { value: "15+", label: "Years of Experience" },
-  { value: "5", label: "Major Ports Covered" },
-  { value: "24/7", label: "WhatsApp Support" }
-];
-
-const steps = [
-  { step: "01", title: "Contact Us on WhatsApp", desc: "Send us your vehicle details — Make, Model, Year, VIN, and arrival port. We respond within minutes." },
-  { step: "02", title: "Receive a Price Quote", desc: "We calculate customs duty, port fees, and clearing charges and send you a transparent breakdown." },
-  { step: "03", title: "Submit Required Documents", desc: "Bill of lading, purchase invoice, export title, and valid ID — our team guides you through every requirement." },
-  { step: "04", title: "We Handle the Port", desc: "Our licensed officers interface with Nigeria Customs and all government agencies on your behalf at the port." },
-  { step: "05", title: "Duty Payment & Release", desc: "We process all duty payments and coordinate terminal release procedures for your vehicle." },
-  { step: "06", title: "Delivery to Your Door", desc: "Safely transported from port to your home, office, or any state in Nigeria by our trusted logistics partners." }
-];
-
-export default function HomePage() {
+export default function SocialHomePage() {
   return (
-    <>
-      {/* ── HERO ─────────────────────────────────────────────────── */}
-      <section className="hero-bg text-white overflow-hidden">
-        <div className="container-pad grid min-h-[400px] sm:min-h-[520px] items-center gap-10 py-12 sm:py-16 md:py-24 lg:grid-cols-2">
-          <div>
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.2em] text-yellow-300 mb-3">
-              Nigeria&apos;s Trusted Vehicle Clearing Agency
-            </p>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
-              We make vehicle{" "}
-              <span className="text-gold">imports &amp; clearance</span>{" "}
-              simple!
-            </h1>
-            <p className="mt-4 text-sm sm:text-base md:text-lg text-white/80 max-w-xl leading-relaxed">
-              OLADECK Global Services is the vehicle clearing agent in Nigeria you can always count on — fast, transparent, and hassle-free from port to delivery.
-            </p>
-            <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-              <a
-                href={whatsappUrl("Hello OLADECK Global Services, I would like to clear my vehicle. Please advise on pricing.")}
-                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 py-3 font-bold text-sm text-white hover:bg-[#1db854] transition shadow-md w-full sm:w-auto"
-              >
-                <MessageCircle className="h-5 w-5" /> Chat on WhatsApp
-              </a>
-              <Link
-                href="/quote"
-                className="flex items-center justify-center gap-2 rounded-full border-2 border-white/30 bg-white/10 px-6 py-3 font-bold text-sm text-white hover:bg-white/20 transition w-full sm:w-auto"
-              >
-                Get a Quote Online
-              </Link>
-            </div>
-            <div className="mt-8 grid grid-cols-2 gap-2.5 sm:grid-cols-4">
-              {stats.map((s) => (
-                <div key={s.label} className="text-center rounded-xl bg-white/10 p-3 border border-white/15 backdrop-blur">
-                  <p className="text-xl sm:text-2xl font-extrabold text-gold">{s.value}</p>
-                  <p className="mt-0.5 text-[11px] text-white/80">{s.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="hidden lg:block relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
-              <img
-                src="https://images.unsplash.com/photo-1494412685616-a5d310fbb07d?auto=format&fit=crop&w=900&q=85"
-                alt="Cargo containers at Nigerian port"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/60 to-transparent" />
-            </div>
-            <div className="absolute -bottom-4 -left-4 rounded-xl bg-white text-navy p-4 shadow-lifted flex items-center gap-3">
-              <div className="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
-              </div>
-              <div>
-                <p className="font-bold text-sm">Port-to-Door Delivery</p>
-                <p className="text-xs text-muted-foreground">Covered across all Nigerian states</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── MARQUEE TRUST BAR ────────────────────────────────────── */}
-      <div className="border-y border-border bg-muted/40 py-3.5 overflow-hidden">
-        <div className="container-pad flex items-center justify-center flex-wrap gap-2.5 sm:gap-6 text-[11px] sm:text-xs font-bold uppercase tracking-wider text-navy">
-          {["Apapa Port", "Tin Can Island", "PTML Terminal", "Onne Port", "All Nigerian States", "Licensed & Bonded", "Customs Compliant"].map((item) => (
-            <span key={item} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-white border border-border shadow-2xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-gold shrink-0" />
-              {item}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* ── ABOUT ────────────────────────────────────────────────── */}
-      <section id="about" className="section-light py-16 md:py-24">
-        <div className="container-pad grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="relative order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-3">
-              <img
-                src="https://images.unsplash.com/photo-1542362567-b07e54358753?auto=format&fit=crop&w=600&q=85"
-                alt="Luxury car clearing"
-                className="rounded-2xl object-cover aspect-square shadow-card col-span-1"
-              />
-              <div className="grid gap-3 col-span-1">
-                <img
-                  src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=400&q=85"
-                  alt="Port operations"
-                  className="rounded-2xl object-cover w-full h-full shadow-card"
-                />
-                <img
-                  src="https://images.unsplash.com/photo-1619767886558-efdc259cde1a?auto=format&fit=crop&w=400&q=85"
-                  alt="Vehicle processing"
-                  className="rounded-2xl object-cover w-full h-full shadow-card"
-                />
-              </div>
-            </div>
-            <div className="absolute -bottom-3 -right-3 rounded-xl bg-gold text-white px-4 py-3 shadow-gold text-center">
-              <p className="text-2xl font-extrabold">15+</p>
-              <p className="text-xs font-medium">Years in Business</p>
-            </div>
-          </div>
-          <div className="order-1 lg:order-2">
-            <span className="accent-line" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">About Us</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              The Only Clearing Agent in Nigeria You Will Ever Need
-            </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              As the most efficient clearing agent in Nigeria, OLADECK Global Services acts as your dedicated guide through the often complex import and export process. From the moment your vehicle docks at the port, we act on your behalf — clearing through Nigeria Customs, ensuring 100% compliance with all regulations, processing duties and tariffs, and ultimately delivering your vehicle to your door.
-            </p>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              Our licensed team of logistics and customs professionals take great pride in helping importers of all experience levels — from first-time buyers to large-volume commercial dealers — handle each case with exceptional care.
-            </p>
-            <ul className="mt-6 grid gap-2.5 sm:grid-cols-2">
-              {["Licensed by Nigeria Customs", "All documents handled online", "WhatsApp real-time updates", "Serving all Nigerian ports", "15+ years of experience", "Corporate fleet specialists"].map((item) => (
-                <li key={item} className="flex items-center gap-2.5 text-sm font-medium text-foreground">
-                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
-              <Link href="/quote" className="rounded-full bg-navy px-5 py-3 sm:py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition text-center">
-                Start a Clearing Request
-              </Link>
-              <Link href="/contact" className="rounded-full border border-border px-5 py-3 sm:py-2.5 text-sm font-semibold text-foreground hover:bg-muted transition text-center">
-                Contact Us
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── SERVICES ─────────────────────────────────────────────── */}
-      <section id="services" className="section-muted py-16 md:py-24">
-        <div className="container-pad">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="accent-line mx-auto" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">What We Do</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              Specialist Clearing Services for Imported Vehicles
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              We handle every aspect of the vehicle clearing process so you can focus on your business.
-            </p>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => (
-              <div key={s.title} className="service-card p-6">
-                <div className="text-3xl mb-4">{s.icon}</div>
-                <h3 className="font-bold text-navy text-lg mb-2">{s.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── HOW IT WORKS ─────────────────────────────────────────── */}
-      <section className="section-light py-16 md:py-24">
-        <div className="container-pad">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="accent-line mx-auto" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Simple Process</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              How Vehicle Clearing Works with OLADECK
-            </h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {steps.map((s) => (
-              <div key={s.step} className="relative rounded-xl border border-border bg-white p-6 shadow-card hover:shadow-lifted transition">
-                <span className="absolute -top-3 -left-1 text-5xl font-extrabold text-muted/60 select-none">{s.step}</span>
-                <h3 className="mt-6 font-bold text-navy text-base">{s.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── CUSTOMS CLEARANCE DETAIL ─────────────────────────────── */}
-      <section className="section-light-blue py-16 md:py-24">
-        <div className="container-pad grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
-            <span className="accent-line" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Customs Clearance</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              Licensed Customs Agents with Deep Nigeria Expertise
-            </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              OLADECK Global Services is a fully licensed clearing agent in Nigeria with deep expertise in import and export procedures. We have served both direct importers and exporters, as well as Nigerian-based and international freight forwarding professionals, with excellent customs clearance services for over 15 years.
-            </p>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              Located in Apapa, Lagos, our team deals with the Nigeria Customs Service and all other government agencies on behalf of your company or yourself — obtaining the fastest possible clearance into the country. We file entries electronically and ensure all government agency requirements — including NAFDAC, SON, NFPC, and NXp — are met before your goods arrive at the port.
-            </p>
-            <div className="mt-6 grid gap-3">
-              {["Electronic entry filing with NCS", "NAFDAC & SON compliance", "PAAR & SON conformity assessment", "Bill of lading to release handled"].map((item) => (
-                <div key={item} className="flex items-center gap-3 text-sm font-medium">
-                  <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
-                  {item}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="rounded-2xl overflow-hidden shadow-lifted aspect-[4/3]">
-            <img
-              src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=800&q=85"
-              alt="Container port customs clearance"
-              className="w-full h-full object-cover"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* ── CLEARING & FORWARDING ────────────────────────────────── */}
-      <section className="section-light py-16 md:py-24">
-        <div className="container-pad grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div className="rounded-2xl overflow-hidden shadow-lifted aspect-[4/3]">
-            <img
-              src="https://images.unsplash.com/photo-1616432043562-3671ea2e5242?auto=format&fit=crop&w=800&q=85"
-              alt="Freight forwarding trucks"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <div>
-            <span className="accent-line" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Clearing & Forwarding</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              From Any Port in the World to Your Doorstep in Nigeria
-            </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Our professional freight clearance services include FCL and LCL shipments for exports and worldwide containers arriving weekly to Nigeria — whether part loads or full loads from all international ports including seaports and airports.
-            </p>
-            <p className="mt-3 text-muted-foreground leading-relaxed">
-              Especially relevant — whether your company is large or small, the weight of cargo light or heavy — OLADECK Global Services will take care of your vehicle from dock to door if required to do so. We handle all export documentation filing, carrier arrangements, packing, crating, and storage needs.
-            </p>
-            <a
-              href={whatsappUrl("Hello OLADECK Global Services, I need freight forwarding and clearing services.")}
-              className="mt-6 flex sm:inline-flex items-center justify-center gap-2 rounded-full bg-navy px-5 py-3 sm:py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition"
-            >
-              <MessageCircle className="h-4 w-4" /> Get a Freight Quote on WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* ── INDUSTRIES ───────────────────────────────────────────── */}
-      <section className="section-muted py-16 md:py-24">
-        <div className="container-pad">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <span className="accent-line mx-auto" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Industries We Serve</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              Clearing Solutions Across All Import Sectors
-            </h2>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {industries.map((ind) => (
-              <div key={ind.label} className="service-card p-5 flex items-start gap-4">
-                <div className="h-10 w-10 rounded-lg bg-navy/8 flex items-center justify-center shrink-0">
-                  <Ship className="h-5 w-5 text-navy" />
+    <div className="bg-[#F8FAFC] min-h-screen py-6 md:py-10">
+      <div className="container-pad">
+        {/* Main 3-Column Social Media Layout */}
+        <div className="grid gap-6 lg:grid-cols-12 items-start">
+          
+          {/* ── LEFT SIDEBAR (Desktop) ── */}
+          <aside className="hidden lg:block lg:col-span-3 space-y-4 sticky top-20">
+            {/* User Profile / Quick Action Card */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-5 shadow-xs space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full bg-navy flex items-center justify-center text-gold font-extrabold shadow-md ring-2 ring-gold/40">
+                  <ShieldCheck className="h-7 w-7" />
                 </div>
                 <div>
-                  <h3 className="font-bold text-navy text-sm">{ind.label}</h3>
-                  <p className="mt-1 text-xs text-muted-foreground">{ind.detail}</p>
+                  <h3 className="font-extrabold text-navy text-sm leading-tight">OLADECK Global</h3>
+                  <p className="text-[11px] text-muted-foreground">@oladeck_official</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── WHY CHOOSE US ────────────────────────────────────────── */}
-      <section className="section-navy py-16 md:py-24">
-        <div className="container-pad">
-          <div className="max-w-2xl mx-auto text-center mb-12">
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-3">Why Choose OLADECK?</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white md:text-4xl">
-              The Clearing Agent of Choice for Hundreds of Importers
-            </h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {whyUs.map((item) => {
-              const Icon = item.icon;
-              return (
-                <div key={item.title} className="rounded-xl bg-white/8 border border-white/12 p-5">
-                  <div className="h-10 w-10 rounded-lg bg-gold/20 flex items-center justify-center mb-4">
-                    <Icon className="h-5 w-5 text-gold" />
-                  </div>
-                  <h3 className="font-bold text-white text-sm mb-2">{item.title}</h3>
-                  <p className="text-xs text-white/65 leading-relaxed">{item.desc}</p>
-                </div>
-              );
-            })}
-          </div>
-          {/* Big CTA */}
-          <div className="mt-14 rounded-2xl bg-gold/20 border border-gold/30 p-5 sm:p-8 md:p-12 text-center">
-            <h3 className="text-xl sm:text-2xl font-extrabold text-white md:text-3xl">
-              Have a Vehicle to Clear? Let's Talk Pricing.
-            </h3>
-            <p className="mt-3 text-sm sm:text-base text-white/75 max-w-xl mx-auto">
-              Send us your car details on WhatsApp — Make, Model, Year, VIN, and arrival port — and we will send you a full clearing price breakdown within minutes.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href={whatsappUrl("Hello OLADECK Global Services, I want to clear my car. Here are the details:\n\n- Make & Model:\n- Year:\n- VIN:\n- Arrival Port:")}
-                className="flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 sm:px-8 py-3 text-sm sm:text-base font-bold text-white hover:bg-[#1db854] transition shadow-lg w-full sm:w-auto"
-              >
-                <MessageCircle className="h-5 w-5" /> Send Vehicle Details on WhatsApp
-              </a>
-              <Link
-                href="/quote"
-                className="flex items-center justify-center gap-2 rounded-full border-2 border-white/30 px-6 sm:px-8 py-3 text-sm sm:text-base font-semibold text-white hover:bg-white/10 transition w-full sm:w-auto"
-              >
-                Submit Request Online
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── TOOLS ROW ────────────────────────────────────────────── */}
-      <section className="section-light py-16 md:py-24">
-        <div className="container-pad grid gap-8 lg:grid-cols-2">
-          <DutyEstimator />
-          <DocumentChecklist />
-        </div>
-      </section>
-
-      {/* ── GALLERY ──────────────────────────────────────────────── */}
-      <Gallery items={galleryItems} />
-
-      {/* ── LIVE TRACKING ────────────────────────────────────────── */}
-      <section className="section-muted py-16 md:py-24">
-        <div className="container-pad">
-          <div className="max-w-2xl mb-10">
-            <span className="accent-line" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Live Tracking</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              Track Your Vehicle Clearing Progress
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              Every quote receives a unique tracking number. Use it below to check your clearing status in real time.
-            </p>
-          </div>
-          <TrackingDashboard />
-        </div>
-      </section>
-
-      {/* ── FAQ ──────────────────────────────────────────────────── */}
-      <section className="section-light py-16 md:py-24">
-        <div className="container-pad grid gap-10 lg:grid-cols-[1fr_1.4fr] lg:items-start">
-          <div>
-            <span className="accent-line" />
-            <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">FAQs</p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy md:text-4xl">
-              Frequently Asked Questions
-            </h2>
-            <p className="mt-4 text-muted-foreground leading-relaxed">
-              Answers to the most common questions about vehicle importing, customs clearance, duties, and documentation in Nigeria.
-            </p>
-            <a
-              href={whatsappUrl("Hello OLADECK Global Services, I have a question about clearing my vehicle.")}
-              className="mt-6 inline-flex items-center gap-2 rounded-full bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-navy/90 transition"
-            >
-              <MessageCircle className="h-4 w-4" /> Ask Us on WhatsApp
-            </a>
-          </div>
-          <Accordion items={faqs} />
-        </div>
-      </section>
-
-      {/* ── BLOG & RESOURCES ─────────────────────────────────────── */}
-      <section className="section-muted py-16 md:py-24">
-        <div className="container-pad">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-            <div>
-              <span className="accent-line" />
-              <p className="text-xs font-bold uppercase tracking-widest text-gold mb-2">Import Guides</p>
-              <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-navy">Latest Articles & Port Updates</h2>
-            </div>
-            <Link href="/blog" className="hidden sm:inline-flex rounded-full border border-border px-4 py-2 text-sm font-semibold hover:bg-white transition shrink-0">
-              View All Articles →
-            </Link>
-          </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {blogPosts.map((post) => (
-              <div key={post.slug} className="service-card overflow-hidden group">
-                <div className="h-44 overflow-hidden relative">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/30 to-transparent" />
-                </div>
-                <div className="p-5">
-                  <span className="inline-block rounded-full bg-gold/12 text-gold text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 mb-3">
-                    {post.category}
-                  </span>
-                  <h3 className="font-bold text-navy text-sm leading-snug">{post.title}</h3>
-                  <p className="mt-2 text-xs text-muted-foreground leading-relaxed line-clamp-2">{post.excerpt}</p>
-                  <p className="mt-4 text-[11px] text-muted-foreground">{post.date} · {post.readTime}</p>
-                </div>
+              <div className="p-3 rounded-2xl bg-gold/10 border border-gold/30 text-xs font-semibold text-navy flex items-center gap-2">
+                <CheckCircle2 className="h-4 w-4 text-gold shrink-0" />
+                <span>Licensed Customs Agent #CAC-84920</span>
               </div>
-            ))}
-          </div>
 
-          {/* Port updates & downloads */}
-          <div className="mt-12 grid gap-6 lg:grid-cols-2">
-            <div>
-              <h3 className="font-bold text-navy text-base mb-4">Port Updates</h3>
-              {portUpdates.length ? (
-                portUpdates.map((u) => (
-                  <div key={u.title} className="service-card p-4 mb-3">
-                    <p className="text-[10px] font-bold text-gold uppercase">{u.date}</p>
-                    <p className="font-bold text-sm text-navy mt-1">{u.title}</p>
-                    <p className="text-xs text-muted-foreground mt-1 leading-relaxed">{u.body}</p>
-                  </div>
-                ))
-              ) : (
-                <div className="rounded-lg border border-dashed border-border p-6 text-sm text-muted-foreground text-center">
-                  No active port notices at this time.
-                </div>
-              )}
+              <div className="space-y-2 pt-1 text-xs font-bold">
+                <Link
+                  href="/quote"
+                  className="flex items-center justify-center gap-2 w-full rounded-2xl bg-navy text-white py-2.5 hover:bg-navy/90 transition shadow-sm"
+                >
+                  <PlusCircle className="h-4 w-4 text-gold" /> Clear My Vehicle Now
+                </Link>
+                <Link
+                  href="/track"
+                  className="flex items-center justify-center gap-2 w-full rounded-2xl border border-gray-200 bg-muted/30 text-navy py-2.5 hover:bg-muted transition"
+                >
+                  <PackageCheck className="h-4 w-4" /> Track Port Shipment
+                </Link>
+                <Link
+                  href="/about"
+                  className="flex items-center justify-center gap-2 w-full rounded-2xl border border-gray-200 bg-white text-muted-foreground py-2.5 hover:text-navy transition"
+                >
+                  About OLADECK &amp; Services
+                </Link>
+              </div>
             </div>
-            <div>
-              <h3 className="font-bold text-navy text-base mb-4">Free Downloads</h3>
-              <div className="grid gap-2">
-                {resources.map((r) => (
-                  <a key={r} href="/blog" className="flex items-center gap-3 rounded-lg border border-border bg-white p-3.5 text-sm font-medium text-navy hover:bg-muted hover:border-gold/40 transition">
-                    <span className="h-8 w-8 rounded-md bg-gold/12 flex items-center justify-center text-gold text-xs font-bold shrink-0">PDF</span>
-                    {r}
-                  </a>
+
+            {/* Trending Topics Box */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-5 shadow-xs space-y-3">
+              <h4 className="text-xs font-extrabold uppercase tracking-wider text-navy flex items-center gap-1.5">
+                <Flame className="h-4 w-4 text-amber-500" /> Trending Port Topics
+              </h4>
+              <div className="divide-y divide-gray-100 text-xs">
+                {trendingTopics.map((topic) => (
+                  <div key={topic.tag} className="py-2.5 flex items-center justify-between">
+                    <div>
+                      <p className="font-bold text-navy hover:underline cursor-pointer">{topic.tag}</p>
+                      <p className="text-[10px] text-muted-foreground">{topic.posts}</p>
+                    </div>
+                    <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
+                      Live
+                    </span>
+                  </div>
                 ))}
               </div>
             </div>
-          </div>
+          </aside>
+
+          {/* ── CENTER FEED (Main Content) ── */}
+          <main className="lg:col-span-6 space-y-6">
+            
+            {/* Story / Highlights Bar */}
+            <div className="bg-white border border-gray-200 p-4 rounded-3xl shadow-xs space-y-2">
+              <div className="flex items-center justify-between text-xs font-bold text-navy px-1">
+                <span className="flex items-center gap-1.5 text-amber-600">
+                  <Sparkles className="h-4 w-4" /> Today&apos;s Port Spotlights
+                </span>
+                <span className="text-[10px] font-semibold text-muted-foreground">Apapa · Tin Can · PTML</span>
+              </div>
+
+              <div className="flex items-center gap-3 overflow-x-auto pb-1 pt-2 scrollbar-none">
+                {storyHighlights.map((story, i) => (
+                  <div key={i} className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+                    <div className="h-16 w-16 rounded-full p-0.5 ring-2 ring-amber-500 group-hover:scale-105 transition duration-200 relative">
+                      <img src={story.avatar} alt={story.name} className="w-full h-full object-cover rounded-full" />
+                      <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-extrabold bg-amber-500 text-slate-950 px-1.5 py-0.2 rounded-full uppercase">
+                        {story.tag}
+                      </span>
+                    </div>
+                    <span className="text-[11px] font-bold text-navy">{story.name}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Prompt Bar (Truth Social style prompt) */}
+            <div className="bg-white border border-gray-200 p-4 rounded-3xl shadow-xs flex items-center gap-3">
+              <div className="h-10 w-10 rounded-full bg-gold/20 flex items-center justify-center text-navy font-bold shrink-0">
+                🚗
+              </div>
+              <div className="flex-1 bg-muted/30 hover:bg-muted/60 transition rounded-2xl px-4 py-2.5 text-xs text-muted-foreground cursor-pointer font-medium">
+                Importing a car soon? Click here to calculate clearance duty...
+              </div>
+              <Link
+                href="/quote"
+                className="px-4 py-2 rounded-2xl bg-navy text-white text-xs font-bold hover:bg-navy/90 transition shrink-0"
+              >
+                Get Quote
+              </Link>
+            </div>
+
+            {/* The Main Social Feed */}
+            <ClearanceFeed />
+          </main>
+
+          {/* ── RIGHT SIDEBAR (Desktop) ── */}
+          <aside className="hidden lg:block lg:col-span-3 space-y-4 sticky top-20">
+            {/* Live WhatsApp Agent Desk Card */}
+            <div className="bg-gradient-to-br from-navy to-slate-900 text-white rounded-3xl p-5 shadow-md space-y-3">
+              <div className="inline-flex items-center gap-1.5 rounded-full bg-gold/20 px-3 py-1 text-[10px] font-bold text-gold border border-gold/30">
+                <ShieldCheck className="h-3.5 w-3.5" /> 24/7 Agent Support
+              </div>
+              <h3 className="text-base font-extrabold text-white leading-snug">
+                Need Fast Vehicle Clearance at the Port?
+              </h3>
+              <p className="text-xs text-white/70 leading-relaxed">
+                Talk directly with our licensed customs clearing officers on WhatsApp for instant rates &amp; advice.
+              </p>
+              <a
+                href={whatsappUrl("Hello OLADECK Global Services, I want to clear a vehicle and need an immediate quote.")}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center justify-center gap-2 w-full rounded-2xl bg-[#25D366] text-white py-3 text-xs font-bold hover:bg-[#1db854] transition shadow-md"
+              >
+                <MessageCircle className="h-4 w-4" /> WhatsApp Agent Desk
+              </a>
+            </div>
+
+            {/* Quick Info & Navigation Links */}
+            <div className="bg-white border border-gray-200 rounded-3xl p-5 shadow-xs space-y-3 text-xs">
+              <h4 className="font-extrabold text-navy uppercase tracking-wider text-[11px]">Port Information &amp; Services</h4>
+              <div className="space-y-2 text-muted-foreground font-medium">
+                <p className="flex items-center justify-between py-1 border-b border-gray-100">
+                  <span>Apapa Ocean Port</span>
+                  <span className="font-bold text-emerald-600">Active</span>
+                </p>
+                <p className="flex items-center justify-between py-1 border-b border-gray-100">
+                  <span>Tin Can Island Terminal</span>
+                  <span className="font-bold text-emerald-600">Active</span>
+                </p>
+                <p className="flex items-center justify-between py-1 border-b border-gray-100">
+                  <span>PTML RORO Berth</span>
+                  <span className="font-bold text-emerald-600">Active</span>
+                </p>
+                <p className="flex items-center justify-between py-1">
+                  <span>Onne Port Terminal</span>
+                  <span className="font-bold text-emerald-600">Active</span>
+                </p>
+              </div>
+
+              <div className="pt-2 border-t border-gray-100 text-[11px] text-muted-foreground flex flex-wrap gap-x-3 gap-y-1">
+                <Link href="/about" className="hover:underline text-navy font-semibold">About Company</Link>
+                <Link href="/terms" className="hover:underline">Terms</Link>
+                <Link href="/privacy" className="hover:underline">Privacy</Link>
+                <Link href="/contact" className="hover:underline">Contact</Link>
+              </div>
+            </div>
+          </aside>
+
         </div>
-      </section>
-    </>
+      </div>
+    </div>
   );
 }

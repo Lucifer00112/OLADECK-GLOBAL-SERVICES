@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useActionState } from "react";
+import { useEffect, useState, useActionState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { ArrowRight, Lock, LogIn, Mail, Ship } from "lucide-react";
+import { ArrowRight, Lock, LogIn, Mail, ShieldAlert } from "lucide-react";
 import { AuthActionResult, loginAction } from "@/app/auth/actions";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -14,6 +14,7 @@ const initialState: AuthActionResult = { ok: false, message: "" };
 export default function CustomerLoginPage() {
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(loginAction, initialState);
+  const [failedCount, setFailedCount] = useState(0);
 
   useEffect(() => {
     if (state.ok) {
@@ -22,8 +23,19 @@ export default function CustomerLoginPage() {
         router.refresh();
       }, 800);
       return () => clearTimeout(timer);
+    } else if (state.message) {
+      setFailedCount((prev) => {
+        const next = prev + 1;
+        if (next >= 5) {
+          // Auto-redirect to forgot password page after 5 failed attempts
+          setTimeout(() => {
+            router.push("/forgot-password?reason=lockout");
+          }, 1200);
+        }
+        return next;
+      });
     }
-  }, [state.ok, router]);
+  }, [state, router]);
 
   return (
     <section className="flex min-h-[calc(100vh-8rem)] items-center justify-center bg-muted/30 py-16 px-4">
@@ -39,7 +51,12 @@ export default function CustomerLoginPage() {
         </CardHeader>
 
         <CardContent>
-          {state.message ? (
+          {failedCount >= 5 ? (
+            <div className="mb-4 rounded-xl bg-red-500/10 border border-red-500/30 p-3 text-xs font-bold text-red-600 flex items-center gap-2">
+              <ShieldAlert className="h-5 w-5 shrink-0" />
+              <span>5 Failed attempts detected! Redirecting to email verification &amp; password reset...</span>
+            </div>
+          ) : state.message ? (
             <div
               className={`mb-4 rounded-lg p-3 text-xs font-medium ${
                 state.ok
@@ -47,7 +64,7 @@ export default function CustomerLoginPage() {
                   : "bg-red-500/10 text-red-700 border border-red-500/20"
               }`}
             >
-              {state.message}
+              {state.message} (Attempt {failedCount}/5)
             </div>
           ) : null}
 
@@ -70,7 +87,7 @@ export default function CustomerLoginPage() {
                 <label className="text-xs font-semibold text-foreground flex items-center gap-1.5">
                   <Lock className="h-3.5 w-3.5 text-gold" /> Password
                 </label>
-                <Link href="/forgot-password" className="text-[11px] font-medium text-gold hover:underline font-bold">
+                <Link href="/forgot-password" className="text-[11px] font-bold text-gold hover:underline">
                   Forgot password?
                 </Link>
               </div>
@@ -82,7 +99,7 @@ export default function CustomerLoginPage() {
               />
             </div>
 
-            <Button type="submit" disabled={isPending || state.ok} className="mt-2 w-full bg-navy text-white hover:bg-navy/90 font-bold">
+            <Button type="submit" disabled={isPending || state.ok || failedCount >= 5} className="mt-2 w-full bg-navy text-white hover:bg-navy/90 font-bold">
               {isPending ? "Signing In..." : state.ok ? "Redirecting to Portal..." : "Sign In to Account"}
               <LogIn className="ml-2 h-4 w-4" />
             </Button>

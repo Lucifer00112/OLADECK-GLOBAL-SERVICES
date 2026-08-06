@@ -1,4 +1,5 @@
 import type { ClearancePost } from "@/lib/types";
+import { generateInitialComments, type HumanizedComment } from "@/lib/comments-generator";
 
 export const initialClearancePosts: ClearancePost[] = [
   {
@@ -37,8 +38,10 @@ OLADECK GLOBAL SERVICES — PORT OPERATIONS DIVISION
 
 Verified by: OLADECK Operations Command Desk
 ==================================================`,
-    likesCount: 142,
-    viewsCount: 1250,
+    likesCount: 104280,
+    viewsCount: 452100,
+    commentsCount: 31450,
+    comments: generateInitialComments(6),
     createdAt: "2026-08-04",
     author: "OLADECK Operations Desk",
     featured: true
@@ -73,8 +76,10 @@ OLADECK GLOBAL SERVICES — PORT OPERATIONS DIVISION
 
 Verified by: OLADECK Operations Command Desk
 ==================================================`,
-    likesCount: 98,
-    viewsCount: 890,
+    likesCount: 118450,
+    viewsCount: 512300,
+    commentsCount: 34820,
+    comments: generateInitialComments(6),
     createdAt: "2026-08-02",
     author: "OLADECK Port Team",
     featured: true
@@ -107,8 +112,10 @@ OLADECK GLOBAL SERVICES — PORT OPERATIONS DIVISION
 
 Verified by: OLADECK Operations Command Desk
 ==================================================`,
-    likesCount: 185,
-    viewsCount: 1620,
+    likesCount: 142900,
+    viewsCount: 620400,
+    commentsCount: 38100,
+    comments: generateInitialComments(6),
     createdAt: "2026-07-29",
     author: "OLADECK Operations Desk",
     featured: false
@@ -137,8 +144,10 @@ OLADECK GLOBAL SERVICES — PORT OPERATIONS DIVISION
 
 Verified by: OLADECK Operations Command Desk
 ==================================================`,
-    likesCount: 76,
-    viewsCount: 640,
+    likesCount: 109800,
+    viewsCount: 380100,
+    commentsCount: 30200,
+    comments: generateInitialComments(6),
     createdAt: "2026-07-25",
     author: "OLADECK Eastern Operations",
     featured: false
@@ -163,7 +172,14 @@ export function getClearancePosts(): ClearancePost[] {
 
 export function saveClearancePost(newPost: ClearancePost): ClearancePost[] {
   const current = getClearancePosts();
-  const updated = [newPost, ...current];
+  // Ensure new post automatically gets 100k+ likes and 30k+ comments with humanized comments
+  const postWithStats: ClearancePost = {
+    ...newPost,
+    likesCount: newPost.likesCount > 1000 ? newPost.likesCount : 102450 + Math.floor(Math.random() * 20000),
+    commentsCount: newPost.commentsCount > 1000 ? newPost.commentsCount : 31200 + Math.floor(Math.random() * 5000),
+    comments: newPost.comments?.length ? newPost.comments : generateInitialComments(6)
+  };
+  const updated = [postWithStats, ...current];
   if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   }
@@ -182,6 +198,35 @@ export function deleteClearancePost(id: string): ClearancePost[] {
 export function toggleLikeClearancePost(id: string): ClearancePost[] {
   const current = getClearancePosts();
   const updated = current.map((p) => (p.id === id ? { ...p, likesCount: p.likesCount + 1 } : p));
+  if (typeof window !== "undefined") {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+  }
+  return updated;
+}
+
+export function addCommentToPost(postId: string, commentText: string, authorName: string = "Registered Visitor"): ClearancePost[] {
+  const current = getClearancePosts();
+  const updated = current.map((p) => {
+    if (p.id === postId) {
+      const newComment: HumanizedComment = {
+        id: `user-comment-${Date.now()}`,
+        authorName,
+        avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=150&q=80",
+        text: commentText,
+        timestamp: "Just now",
+        likes: 1,
+        verifiedCustomer: false
+      };
+      const existingComments = p.comments || [];
+      return {
+        ...p,
+        commentsCount: p.commentsCount + 1,
+        comments: [newComment, ...existingComments]
+      };
+    }
+    return p;
+  });
+
   if (typeof window !== "undefined") {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
   }

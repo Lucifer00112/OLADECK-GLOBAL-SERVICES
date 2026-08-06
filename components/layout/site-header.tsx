@@ -38,8 +38,15 @@ const industries = [
   ["Corporate Fleets", "/#services"]
 ];
 
+import { usePathname } from "next/navigation";
+
 export function SiteHeader() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
   const [servicesOpen, setServicesOpen] = useState(false);
   const [industriesOpen, setIndustriesOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);

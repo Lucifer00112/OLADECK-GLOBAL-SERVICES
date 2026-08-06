@@ -63,6 +63,8 @@ export type VehicleCatalogEntry = {
   image: string;
 };
 
+import type { HumanizedComment } from "@/lib/comments-generator";
+
 export type ClearancePost = {
   id: string;
   title: string;
@@ -77,6 +79,8 @@ export type ClearancePost = {
   documentation: string;
   likesCount: number;
   viewsCount: number;
+  commentsCount: number;
+  comments?: HumanizedComment[];
   createdAt: string;
   author: string;
   featured?: boolean;

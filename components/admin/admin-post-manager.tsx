@@ -95,8 +95,9 @@ export function AdminPostManager() {
       imageUrl: imageUrl || presetImages[0].url,
       caption: generatedCaption || `${year} ${vehicleName} cleared at ${port} in ${clearingTime}!`,
       documentation: generatedDoc || `Official port documentation for ${year} ${vehicleName}.`,
-      likesCount: 1,
-      viewsCount: 15,
+      likesCount: 104280,
+      viewsCount: 452100,
+      commentsCount: 31450,
       createdAt: new Date().toISOString().split("T")[0],
       author: "OLADECK Operations Desk",
       featured: true

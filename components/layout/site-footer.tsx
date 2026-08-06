@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Mail, MapPin, MessageCircle, Phone, Ship } from "lucide-react";
 import { whatsappUrl } from "@/lib/utils";
 
@@ -37,6 +40,10 @@ const footerLinks = {
 };
 
 export function SiteFooter() {
+  const pathname = usePathname();
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
   return (
     <footer className="bg-navy text-white">
       {/* CTA strip */}
