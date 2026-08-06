@@ -6,6 +6,7 @@ const footerLinks = {
   "Quick Links": [
     ["Home", "/"],
     ["About Us", "/#about"],
+    ["Port Works & Showcase", "/gallery"],
     ["Get a Quote", "/quote"],
     ["Track Shipment", "/track"],
     ["Customer Sign In", "/login"],

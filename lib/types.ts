@@ -62,3 +62,22 @@ export type VehicleCatalogEntry = {
   origin: string;
   image: string;
 };
+
+export type ClearancePost = {
+  id: string;
+  title: string;
+  vehicle: string;
+  year: number;
+  port: string;
+  clearingTime: string;
+  dutyPaid: boolean;
+  category: "SUVs" | "Sedans" | "Luxury" | "Commercial" | "Electric Vehicles" | "Trucks & Pickups";
+  imageUrl: string;
+  caption: string;
+  documentation: string;
+  likesCount: number;
+  viewsCount: number;
+  createdAt: string;
+  author: string;
+  featured?: boolean;
+};

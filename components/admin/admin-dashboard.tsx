@@ -42,6 +42,7 @@ import {
 } from "@/app/admin/actions";
 import { AdminMetrics } from "@/components/admin/admin-metrics";
 import { AdminPricingManager } from "@/components/admin/admin-pricing-manager";
+import { AdminPostManager } from "@/components/admin/admin-post-manager";
 
 const initialPayload: AdminDashboardPayload = {
   authenticated: true,
@@ -55,7 +56,7 @@ type Role = "admin" | "manager" | "staff";
 
 export function AdminDashboard() {
   const router = useRouter();
-  const [activeTab, setActiveTab] = useState<"quotes" | "metrics" | "pricing" | "audit">("quotes");
+  const [activeTab, setActiveTab] = useState<"quotes" | "metrics" | "pricing" | "audit" | "works">("quotes");
   const [currentRole, setCurrentRole] = useState<Role>("admin");
   const [selectedQuote, setSelectedQuote] = useState<QuoteRecord | null>(null);
   const [query, setQuery] = useState("");
@@ -325,6 +326,17 @@ export function AdminDashboard() {
           )}
 
           <button
+            onClick={() => setActiveTab("works")}
+            className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition ${
+              activeTab === "works"
+                ? "bg-amber-500 text-slate-950 shadow-md"
+                : "bg-slate-900 text-amber-400 hover:bg-slate-800 hover:text-amber-300 border border-amber-500/30"
+            }`}
+          >
+            <Sparkles className="h-4 w-4" /> Showcase Feed &amp; AI Writer
+          </button>
+
+          <button
             onClick={() => setActiveTab("audit")}
             className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition ${
               activeTab === "audit"
@@ -522,7 +534,14 @@ export function AdminDashboard() {
           </div>
         )}
 
-        {/* TAB 4: Audit Logs */}
+        {/* TAB 4: Showcase Feed & AI Writer */}
+        {activeTab === "works" && (
+          <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+            <AdminPostManager />
+          </div>
+        )}
+
+        {/* TAB 5: Audit Logs */}
         {activeTab === "audit" && (
           <div className="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-4">
             <div className="flex items-center justify-between border-b border-slate-800 pb-3">

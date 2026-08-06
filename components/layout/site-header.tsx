@@ -181,6 +181,9 @@ export function SiteHeader() {
             )}
           </div>
 
+          <Link href="/gallery" className="px-3 py-2 rounded-md text-sm font-semibold text-amber-600 hover:bg-amber-50 transition flex items-center gap-1">
+            <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" /> Port Works
+          </Link>
           <Link href="/blog" className="px-3 py-2 rounded-md text-sm font-medium text-foreground hover:text-navy hover:bg-muted transition">
             Blog
           </Link>
@@ -299,6 +302,17 @@ export function SiteHeader() {
                 </div>
               )}
             </div>
+
+            <Link
+              href="/gallery"
+              onClick={() => setMobileOpen(false)}
+              className="flex items-center justify-between py-3 px-4 rounded-xl bg-amber-500/10 border border-amber-500/30 text-sm font-bold text-navy"
+            >
+              <span className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" /> Cleared Vehicles Showcase
+              </span>
+              <ChevronRight className="h-4 w-4 text-navy" />
+            </Link>
 
             <Link
               href="/blog"
