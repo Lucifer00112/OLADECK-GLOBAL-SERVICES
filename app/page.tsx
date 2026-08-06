@@ -1,6 +1,10 @@
-import type { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import { ClearanceFeed } from "@/components/portfolio/clearance-feed";
+import { LiveStreamBanner } from "@/components/portfolio/live-stream-banner";
+import { StoryViewerModal, sampleStories } from "@/components/portfolio/story-viewer-modal";
 import {
   CheckCircle2,
   FileText,
@@ -8,39 +12,12 @@ import {
   MessageCircle,
   PackageCheck,
   PlusCircle,
+  Radio,
   ShieldCheck,
   Sparkles,
   TrendingUp
 } from "lucide-react";
 import { whatsappUrl } from "@/lib/utils";
-
-export const metadata: Metadata = {
-  title: "OLADECK Social — Live Cleared Vehicles & Port Operations Feed",
-  description: "Browse verified cleared vehicles, port release documentations, and real-time customs updates from Apapa, Tin Can, and PTML."
-};
-
-const storyHighlights = [
-  {
-    name: "Apapa Dock",
-    avatar: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=200&q=80",
-    tag: "LIVE"
-  },
-  {
-    name: "Tin Can RORO",
-    avatar: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=200&q=80",
-    tag: "RELEASED"
-  },
-  {
-    name: "PTML Clearance",
-    avatar: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=200&q=80",
-    tag: "FAST"
-  },
-  {
-    name: "Duty Paid",
-    avatar: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=200&q=80",
-    tag: "VERIFIED"
-  }
-];
 
 const trendingTopics = [
   { tag: "#ApapaPort", posts: "4.2k clearances" },
@@ -51,9 +28,12 @@ const trendingTopics = [
 ];
 
 export default function SocialHomePage() {
+  const [activeStoryIndex, setActiveStoryIndex] = useState<number | null>(null);
+  const [showLiveStream, setShowLiveStream] = useState(true);
+
   return (
-    <div className="bg-[#F8FAFC] min-h-screen py-6 md:py-10">
-      <div className="container-pad">
+    <div className="bg-[#F8FAFC] min-h-screen py-6 md:py-8">
+      <div className="max-w-[1440px] mx-auto px-4 md:px-8">
         {/* Main 3-Column Social Media Layout */}
         <div className="grid gap-6 lg:grid-cols-12 items-start">
           
@@ -62,7 +42,7 @@ export default function SocialHomePage() {
             {/* User Profile / Quick Action Card */}
             <div className="bg-white border border-gray-200 rounded-3xl p-5 shadow-xs space-y-4">
               <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-navy flex items-center justify-center text-gold font-extrabold shadow-md ring-2 ring-gold/40">
+                <div className="h-12 w-12 rounded-full bg-navy flex items-center justify-center text-gold font-extrabold shadow-md shrink-0 ring-2 ring-gold/40">
                   <ShieldCheck className="h-7 w-7" />
                 </div>
                 <div>
@@ -126,14 +106,18 @@ export default function SocialHomePage() {
             <div className="bg-white border border-gray-200 p-4 rounded-3xl shadow-xs space-y-2">
               <div className="flex items-center justify-between text-xs font-bold text-navy px-1">
                 <span className="flex items-center gap-1.5 text-amber-600">
-                  <Sparkles className="h-4 w-4" /> Today&apos;s Port Spotlights
+                  <Sparkles className="h-4 w-4" /> Click Story to View Live Port Video
                 </span>
                 <span className="text-[10px] font-semibold text-muted-foreground">Apapa · Tin Can · PTML</span>
               </div>
 
               <div className="flex items-center gap-3 overflow-x-auto pb-1 pt-2 scrollbar-none">
-                {storyHighlights.map((story, i) => (
-                  <div key={i} className="flex flex-col items-center gap-1.5 shrink-0 cursor-pointer group">
+                {sampleStories.map((story, i) => (
+                  <button
+                    key={story.id}
+                    onClick={() => setActiveStoryIndex(i)}
+                    className="flex flex-col items-center gap-1.5 shrink-0 group focus:outline-none"
+                  >
                     <div className="h-16 w-16 rounded-full p-0.5 ring-2 ring-amber-500 group-hover:scale-105 transition duration-200 relative">
                       <img src={story.avatar} alt={story.name} className="w-full h-full object-cover rounded-full" />
                       <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 text-[9px] font-extrabold bg-amber-500 text-slate-950 px-1.5 py-0.2 rounded-full uppercase">
@@ -141,10 +125,13 @@ export default function SocialHomePage() {
                       </span>
                     </div>
                     <span className="text-[11px] font-bold text-navy">{story.name}</span>
-                  </div>
+                  </button>
                 ))}
               </div>
             </div>
+
+            {/* Live Broadcast Video Banner */}
+            {showLiveStream && <LiveStreamBanner />}
 
             {/* Prompt Bar (Truth Social style prompt) */}
             <div className="bg-white border border-gray-200 p-4 rounded-3xl shadow-xs flex items-center gap-3">
@@ -222,6 +209,14 @@ export default function SocialHomePage() {
 
         </div>
       </div>
+
+      {/* Interactive Story Viewer Modal */}
+      {activeStoryIndex !== null && (
+        <StoryViewerModal
+          initialIndex={activeStoryIndex}
+          onClose={() => setActiveStoryIndex(null)}
+        />
+      )}
     </div>
   );
 }

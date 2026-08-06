@@ -21,21 +21,21 @@ import { logoutAction } from "@/app/auth/actions";
 import { whatsappUrl } from "@/lib/utils";
 
 const services = [
-  ["Customs Clearance", "/#services"],
-  ["Duty Processing", "/#services"],
-  ["Clearing & Forwarding", "/#services"],
-  ["Fleet Clearance", "/#services"],
-  ["Cargo Handling", "/#services"],
-  ["Fast Track Assistance", "/#services"]
+  ["Customs Clearance", "/about#services"],
+  ["Duty Processing", "/about#services"],
+  ["Clearing & Forwarding", "/about#services"],
+  ["Fleet Clearance", "/about#services"],
+  ["Cargo Handling", "/about#services"],
+  ["Fast Track Assistance", "/quote"]
 ];
 
 const industries = [
-  ["Automobile Imports", "/#services"],
-  ["Oil & Gas Equipment", "/#services"],
-  ["Agricultural Machinery", "/#services"],
-  ["Industrial Equipment", "/#services"],
-  ["Government & Military", "/#services"],
-  ["Corporate Fleets", "/#services"]
+  ["Automobile Imports", "/about#services"],
+  ["Oil & Gas Equipment", "/about#services"],
+  ["Agricultural Machinery", "/about#services"],
+  ["Industrial Equipment", "/about#services"],
+  ["Government & Military", "/about#services"],
+  ["Corporate Fleets", "/quote"]
 ];
 
 import { usePathname } from "next/navigation";
